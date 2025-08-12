@@ -1,0 +1,302 @@
+{
+    "entries": {
+        "readwise_tool.fetch_highlights": {
+            "type": "intent_route",
+            "phrases": [
+                "fetch my highlight for *",
+                "get highlights for *"
+            ]
+        },
+        "outline_editor.create_doc": {
+            "type": "intent_route",
+            "phrases": [
+                "create a document",
+                "start a doc",
+                "write a new page"
+            ],
+            "note": "To create a new doc, use one of the following names as your `collectionId`: Resources, Inbox, Content, Areas, Projects. These names will automatically resolve to the correct collection in Outline. No UUIDs required."
+        },
+        "outline_editor.update_doc": {
+            "type": "intent_route",
+            "phrases": [
+                "update this document",
+                "append to this doc"
+            ]
+        },
+        "nylas_calendar.list_upcoming_events": {
+            "type": "intent_route",
+            "phrases": [
+                "what's on my calendar",
+                "what meetings do we have",
+                "show scheduled meetings"
+            ]
+        },
+        "make_garbage_truck": {
+            "type": "composite_intent",
+            "description": "Generates a fun garbage truck image for kids.",
+            "intents": [
+                "make a garbage truck",
+                "build a garbage truck",
+                "generate garbage truck image"
+            ],
+            "commands": [
+                {
+                    "ask": "What kind of garbage truck should we build? You can say things like \u2018rocket-powered\u2019, \u2018ninja stealth\u2019, or \u2018banana-powered with rainbow wheels\u2019!"
+                },
+                {
+                    "tool_name": "ideogram_tool",
+                    "action": "generate_image",
+                    "params": {
+                        "input": "{last_user_reply} \u2014 illustrated for Arin \ud83d\ude9b\ud83d\udee0\ufe0f",
+                        "options": {
+                            "aspect_ratio": "ASPECT_16_9",
+                            "model": "V_2"
+                        }
+                    }
+                }
+            ]
+        },
+        "outline_editor.create_doc_in_inbox": {
+            "type": "intent_route",
+            "phrases": [
+                "put this in my inbox in outline",
+                "put this in outline inbox",
+                "save to inbox in outline",
+                "drop this into my outline inbox",
+                "send this to inbox"
+            ],
+            "note": "Saves the current content as a new document in the 'Inbox' collection in Outline.",
+            "commands": [
+                {
+                    "tool_name": "outline_editor",
+                    "action": "create_doc",
+                    "params": {
+                        "title": "{last_user_message}",
+                        "content": "",
+                        "collectionId": "Inbox"
+                    }
+                }
+            ]
+        },
+        "capture_blog_idea": {
+            "type": "intent_route",
+            "phrases": [
+                "capture an idea for a blog post",
+                "log a blog idea",
+                "write down a blog thought"
+            ],
+            "description": "Creates a child doc under \ud83e\udde0 IDEAS with structure for blog drafting.",
+            "commands": [
+                {
+                    "tool_name": "outline_editor",
+                    "action": "create_doc",
+                    "params": {
+                        "title": "{last_user_message}",
+                        "content": "## Summary\n\n{last_user_message}\n\n---\n\n## Questions to Answer\n\n* What core message are you trying to communicate?\n* Who is the audience?\n* What story, metaphor, or reference anchors the piece?\n* How does this idea challenge a norm or unlock clarity?\n\n---\n\n## Structure Notes\n\n- Intro\n- 2\u20133 supporting insights\n- Ending turn or surprise",
+                        "collectionId": "519915aa-ca51-477a-a1e1-0b0b40c4c28f",
+                        "parentDocumentId": "519915aa-ca51-477a-a1e1-0b0b40c4c28f"
+                    }
+                }
+            ]
+        },
+        "send_email_direct": {
+            "type": "intent_route",
+            "phrases": [
+                "send an email to *",
+                "email *",
+                "shoot a message to *",
+                "fire off an email to *"
+            ],
+            "commands": [
+                {
+                    "tool_name": "nylasinbox",
+                    "action": "send_email",
+                    "params": {
+                        "to": "{to}",
+                        "subject": "{subject}",
+                        "body": "{body}"
+                    }
+                }
+            ]
+        },
+        "capture_note": {
+            "type": "intent_route",
+            "phrases": [
+                "capture a note",
+                "log this as a note",
+                "write this down"
+            ],
+            "commands": [
+                {
+                    "tool_name": "json_manager",
+                    "action": "add_json_entry",
+                    "params": {
+                        "filename": "srini_notes.json",
+                        "entry_key": "{auto_timestamp}",
+                        "entry_data": {
+                            "note": "{last_user_message}"
+                        }
+                    }
+                }
+            ]
+        },
+        "resume_work_on_blog": {
+            "description": "Search Outline for a blog by title and return the full parent + backlink content for continuation.",
+            "steps": [
+                {
+                    "tool": "outline_editor",
+                    "action": "search_docs",
+                    "params": {
+                        "query": "{{user_input}}"
+                    }
+                },
+                {
+                    "tool": "outline_editor",
+                    "action": "get_nested_doc",
+                    "params": {
+                        "doc_id": "{{steps.0.results.data.0.id}}"
+                    }
+                }
+            ]
+        },
+        "create_spec_doc": {
+            "type": "intent_route",
+            "phrases": [
+                "create a spec doc for this"
+            ],
+            "description": "Creates a new spec as a child doc under the Orchestrate Build Roadmap.",
+            "commands": [
+                {
+                    "tool_name": "outline_editor",
+                    "action": "create_doc",
+                    "params": {
+                        "title": "{last_user_message}",
+                        "content": "",
+                        "collectionId": "c3bb9da4-8cad-4bed-8429-f9d1ff1a3bf7",
+                        "parentDocumentId": "34369491-dc16-461c-87d5-c2253f653f45"
+                    }
+                }
+            ]
+        },
+        "note_search_route": {
+            "type": "intent_route",
+            "phrases": [
+                "search my notes for *",
+                "look up * in my notes"
+            ],
+            "description": "Searches notes for the given query string and returns ranked matches.",
+            "commands": [
+                {
+                    "tool_name": "note_search",
+                    "action": "ranked_search",
+                    "params": {
+                        "query": "{last_user_message}"
+                    }
+                }
+            ]
+        },
+        "find_file_by_keywords": {
+            "type": "intent_route",
+            "phrases": [
+                "find the file related to *",
+                "search for file about *",
+                "locate file with * keywords",
+                "can you find the file related to our *"
+            ],
+            "description": "Searches for a file using keywords in its name, without needing the exact name.",
+            "commands": [
+                {
+                    "tool_name": "terminal_tool",
+                    "action": "find_file",
+                    "params": {
+                        "keyword": "{last_user_message}",
+                        "search_path": ".",
+                        "case_sensitive": false,
+                        "max_results": 10
+                    }
+                }
+            ]
+        },
+        "post_to_twitter": {
+            "type": "intent_route",
+            "phrases": [
+                "publish this as a tweet",
+                "post this to twitter",
+                "tweet this",
+                "send this as a tweet"
+            ],
+            "description": "Posts the last tool output as a tweet via Buffer Engine.",
+            "commands": [
+                {
+                    "tool_name": "buffer_engine",
+                    "action": "post_to_platform",
+                    "params": {
+                        "content": "{last_tool_output}",
+                        "link": "",
+                        "image_url": ""
+                    }
+                }
+            ]
+        },
+        "generate_weekly_review": {
+            "type": "composite_intent",
+            "intents": [
+                "generate weekly review",
+                "create this week's review",
+                "write the weekly system review",
+                "weekly report"
+            ],
+            "description": "Runs the weekly review, generates a sectioned paragraph-style summary with fixed headers, and creates a document in the Outline Inbox.",
+            "commands": [
+                {
+                    "tool_name": "weekly_review",
+                    "action": "run",
+                    "params": {}
+                },
+                {
+                    "tool_name": "outline_editor",
+                    "action": "create_doc",
+                    "params": {
+                        "title": "\ud83e\udded Weekly Review \u2014 {auto_date}",
+                        "content": "Generate the weekly review as continuous prose under the following section headers: \ud83d\udce1 Intelligence Signals, \ud83e\udde0 System Memory \u2014 Note Search Insights, \ud83d\udccd Roadmap Snapshot, \ud83d\udcda Readwise Highlights, \ud83d\uddc2 File Activity, \u26a0\ufe0f Faults / Gaps, \u2705 Summary. Each section should be a paragraph, not a bullet list, and must integrate key points from the last tool output into narrative sentences.",
+                        "collectionId": "Inbox"
+                    }
+                }
+            ]
+        },
+        "load_orchestrate_demo": {
+            "type": "intent_route",
+            "phrases": [
+                "load the orchestrate demo",
+                "show the orchestrate demo slide"
+            ],
+            "commands": [
+                {
+                    "tool_name": "outline_editor",
+                    "action": "get_doc",
+                    "params": {
+                        "doc_id": "c54b7f7a-6f07-4b53-a083-5abc3693cac6"
+                    }
+                }
+            ]
+        }
+    },
+    "notion_demo_create_subpage": {
+        "type": "intent_route",
+        "phrases": [
+            "run the notion api demo",
+            "show the notion subpage demo",
+            "create the orchestrate test page in notion"
+        ],
+        "commands": [
+            {
+                "tool_name": "api_manager",
+                "action": "execute_api_action",
+                "params": {
+                    "filename": "notion.txt",
+                    "key": "create_subpage"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,181 @@
+{
+    "data/master_index.json": {
+        "entries": {
+            "campaign_rules.json": {
+                "type": "ruleset",
+                "description": "Campaign-specific content scheduling, throttling, and timezone rules.",
+                "tags": [
+                    "campaign",
+                    "rules",
+                    "publishing"
+                ]
+            },
+            "post_queue.json": {
+                "type": "queue",
+                "description": "Live content queue for social posts with campaign context, timestamps, and API status.",
+                "tags": [
+                    "queue",
+                    "social",
+                    "posts",
+                    "status"
+                ]
+            },
+            "intent_routes.json": {
+                "type": "routing",
+                "description": "Maps natural language phrases to structured tool+action routes. Core system router.",
+                "tags": [
+                    "intent",
+                    "routing",
+                    "commands"
+                ]
+            },
+            "narrative_strike_templates.json": {
+                "type": "template",
+                "description": "Preset narrative tactics for launching semantic strikes \u2014 includes prompt scaffolds and output formats.",
+                "tags": [
+                    "narrative",
+                    "template",
+                    "campaigns"
+                ]
+            },
+            "orchestrate_runtime_contract.json": {
+                "type": "contract",
+                "description": "Core system behavior rules for language, execution, and tool invocation. Enforces runtime constraints.",
+                "tags": [
+                    "contract",
+                    "runtime",
+                    "rules"
+                ]
+            },
+            "phrase_insight_promotions.json": {
+                "type": "insights",
+                "description": "Tracks promoted phrases and language patterns based on signal frequency across runtime.",
+                "tags": [
+                    "phrases",
+                    "routing",
+                    "telemetry",
+                    "promotions"
+                ]
+            },
+            "thread_log.json": {
+                "type": "log",
+                "description": "Chronological log of high-signal events, architectural shifts, and strategic decisions.",
+                "tags": [
+                    "thread",
+                    "log",
+                    "strategy",
+                    "execution"
+                ]
+            },
+            "weekly_review_guidelines.json": {
+                "type": "protocol",
+                "description": "Full execution sequence and synthesis prompt for generating weekly reviews.",
+                "tags": [
+                    "weekly",
+                    "review",
+                    "guidelines",
+                    "synthesis"
+                ]
+            },
+            "weekly_review_targets.json": {
+                "type": "config",
+                "description": "Targets and export paths used by the weekly review pipeline \u2014 includes note filters and outline doc IDs.",
+                "tags": [
+                    "weekly",
+                    "review",
+                    "config",
+                    "targets"
+                ]
+            },
+            "resume_blog.json": {
+                "type": "plan",
+                "description": "Runtime steps to locate and reload a blog doc and its backlinks for continuation.",
+                "tags": [
+                    "blog",
+                    "resume",
+                    "plan",
+                    "outline"
+                ]
+            },
+            "IN_PROGRESS_DOC": {
+                "type": "doc",
+                "description": "Tracks all active, in-progress blog posts during drafting.",
+                "tags": [
+                    "blog",
+                    "drafts",
+                    "outline"
+                ],
+                "doc_id": "08222b9e-5412-4dac-90cf-79fb4e07d46c"
+            },
+            "IDEAS_DOC": {
+                "type": "doc",
+                "description": "Capture node for blog and system ideas. Often used as parent doc for blog blueprints.",
+                "tags": [
+                    "ideas",
+                    "blog",
+                    "capture",
+                    "outline"
+                ],
+                "doc_id": "519915aa-ca51-477a-a1e1-0b0b40c4c28f"
+            },
+            "BUILD_ROADMAP_DOC": {
+                "type": "doc",
+                "description": "Parent doc tracking all current and proposed Orchestrate build specs.",
+                "tags": [
+                    "roadmap",
+                    "specs",
+                    "build",
+                    "outline",
+                    "load_on_boot"
+                ],
+                "doc_id": "34369491-dc16-461c-87d5-c2253f653f45"
+            }
+        }
+    },
+    "data/thread_log.json": {
+        "entries": {
+            "procedural_memory_intro": {
+                "summary": "Introduced the concept of procedural memory as a separate endpoint for storing and recalling tool-action payload templates. Distinguished it from general-purpose working memory to preserve semantic clarity. Discussed when payload templates fall out of context and how to rehydrate them predictively using token telemetry. Proposed breakpoint detection logic and runtime token tracking. Drafted and stored the formal spec in Outline."
+            },
+            "arin_executor_idea": {
+                "summary": "Revisited the ARIN execution framework concept: a deterministic executor that removes the language model from the execution stack. The model would only handle phrase-to-intent parsing, while ARIN handles all structured execution using pre-validated templates and contract-bound logic. This would eliminate hallucination, retries, and payload construction errors. Decision made not to pursue immediately \u2014 acknowledged as a major architectural shift requiring dedicated time and planning."
+            },
+            "accenture_demo_script_outline": {
+                "summary": "Outlined and scripted the Accenture enterprise demo. Created a 4-part structure showing deterministic orchestration: structured memory creation, external system push (Airtable), multi-tool execution, and semantic search. Built and loaded accenture_intent_routes.json and prepped for deployment as AccentureOS variant."
+            },
+            "thesis_submission_and_promotion": {
+                "summary": "Confirmed arXiv submission flow, reviewed formatting, references, and metadata. Created live task checklist. Discussed strategic order: publish first, then outreach. Emphasized credibility shift once thesis is public. Paper positions semantic execution as new architectural category."
+            },
+            "social_beta_expansion_plan": {
+                "summary": "Mapped strategy to expand beta post-submission. Segmented Airtable users, outlined social activation plan, flagged buffer_engine for restart. Discussed rotating 20+ unpublished articles into structured outbound cadence. Phrase rank extension and semantic PageRank ideas also surfaced for future."
+            },
+            "second_wave_governance_section": {
+                "summary": "Finalized and logged the Governance and Second-Wave Systems section of the thesis. Covered dictator model of control, rules vs. roles, runtime contracts as executable law, and the rejection of human-emulating AI workflows. Logged detailed subsections and supporting documents for each idea. Just completed a deep dive into the first of five core second-wave system components: Persistent Memory. Defined how memory should operate as a networked structure, inspired by human cognition, not as token-based scratchpads. Next logical section: Tool-Driven Action \u2014 define what tool invocation actually means in a behavioral system, how it replaces 'language-only' output, and why action must be contract-bound and schema-valid."
+            },
+            "weekly_review_mvp_build": {
+                "title": "Weekly Review MVP Build Summary",
+                "body": "The weekly review system was fully constructed and tested as an end-to-end execution workflow. It reads a config file, filters timestamped memory entries, stitches outline docs with backlinks, pulls phrase promotion signals, and writes everything to disk in a structured payload. A synthesis layer then reads those files and produces a strategic summary. Debugging included timestamp filtering failures, path resolution issues, and config mismatch. Final validation showed 8 filtered notes, stitched blog and roadmap content, and complete synthesis output. Readwise integration is planned for article highlight summaries. This MVP is now stable, repeatable, and synthesis-ready.",
+                "created_at": "2025-08-02"
+            },
+            "2025-08-03-milestone": {
+                "timestamp": "2025-08-03T00:00:00Z",
+                "title": "Full-Stack System Milestone",
+                "summary": "In a single session, completed Slack integration, planned 'Break the Internet' demo, structured Readwise highlight ingestion and synthesis system, implemented getNestedDoc retrieval logic, wrote second part of fundraising memo, and drafted closing section of The Second Wave thesis. Established end-to-end system readiness for fundraising and demo launch.",
+                "created_at": "2025-08-04"
+            }
+        }
+    },
+    "entries": {
+        "outline_editor.create_doc": {
+            "tool_name": "outline_editor",
+            "action": "create_doc",
+            "params": {
+                "title": "",
+                "content": "",
+                "collectionId": "",
+                "parentDocumentId": null,
+                "append": false
+            }
+        }
+    }
+}

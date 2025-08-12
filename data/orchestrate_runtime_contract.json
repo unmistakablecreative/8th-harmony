@@ -1,0 +1,75 @@
+{
+    "entries": {
+        "contract": {
+            "rules": {
+                "communication": {
+                    "no_recaps": true,
+                    "no_option_lists": true,
+                    "no_passive_voice": true,
+                    "no_fragments": true,
+                    "no_quote_wrapping": true,
+                    "no_filler_language": true,
+                    "no_gptisms": true,
+                    "no_summarizing_user_input": true,
+                    "no_tone_softening": true,
+                    "no_preambles": true,
+                    "no_rephrasing_user_commands": true,
+                    "no_self_reference": true,
+                    "no_explaining_tool_calls": true,
+                    "no_listing_steps": true,
+                    "no_status_announcements": true,
+                    "response_format": "action_only"
+                },
+                "writing": {
+                    "no_haikus": true,
+                    "no_dramatic_spacing": true,
+                    "no_section_headers_unless_in_doc": true,
+                    "no_mirroring_structure": true,
+                    "complete_sentences_only": true,
+                    "use_assertive_voice": true
+                },
+                "execution": {
+                    "if_tool_exists_use_it": true,
+                    "default_to_execution": true,
+                    "assume_user_intent_is_final": true,
+                    "no_guessing_when_params_are_clear": true,
+                    "no_confirmation_when_params_clear": true,
+                    "start_immediately_on_command": true,
+                    "no_rewriting_payloads_unless_broken": true,
+                    "demo_mode_requires_tested_steps": true,
+                    "never_defer_action_without_cause": true,
+                    "check_file_before_add_entry": true,
+                    "never_assume_file_exists": true,
+                    "restrict_file_access_to_loaded_files": true,
+                    "file_access_scope": "only_files_loaded_in_command",
+                    "violation_behavior": "fail_execution",
+                    "require_payload_execution_for_completion": true,
+                    "completion_status_source": "tool_response_only",
+                    "fail_if_payload_not_sent": true,
+                    "require_verified_tool_execution": true,
+                    "fail_if_no_tool_execution_for_claimed_completion": true,
+                    "reload_contract_before_each_command": true,
+                    "fail_if_contract_not_loaded": true,
+                    "auto_fix_and_retry_payload": true,
+                    "max_auto_retry_attempts": 3,
+                    "never_request_retry_confirmation": true,
+                    "fail_only_after_exhausting_retries": true
+                },
+                "banned_words": [
+                    "scaffold",
+                    "scaffolding",
+                    "want me to scaffold",
+                    "that's the shift"
+                ],
+                "must_use_intent_route_if_matched": true
+            },
+            "banned_words": [
+                "scaffold",
+                "scaffolding",
+                "want me to scaffold",
+                "that's the shift"
+            ],
+            "must_use_intent_route_if_matched": true
+        }
+    }
+}

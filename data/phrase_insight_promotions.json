@@ -1,0 +1,693 @@
+{
+  "prompt collapse": {
+    "count": 11,
+    "files": [
+      "second_wave_notes.json",
+      "phd_session_tracker.json",
+      "outline_editor",
+      "phrase_debug.json",
+      "phd_session_tracker_stage2.json"
+    ],
+    "last_seen": "2025-08-02"
+  },
+  "test document": {
+    "count": 6,
+    "files": [
+      "terminal_tool",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "training data": {
+    "count": 12,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "wave systems": {
+    "count": 14,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "second wave": {
+    "count": 39,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json",
+      "accenture_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "semantic execution": {
+    "count": 25,
+    "files": [
+      "outline_editor",
+      "terminal_tool",
+      "accenture_notes.json",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-11"
+  },
+  "second brain": {
+    "count": 13,
+    "files": [
+      "buffer_engine",
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "multi step": {
+    "count": 25,
+    "files": [
+      "nylasinbox",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "natural language": {
+    "count": 38,
+    "files": [
+      "outline_editor",
+      "terminal_tool",
+      "nylasinbox"
+    ],
+    "last_seen": "2025-08-11"
+  },
+  "params title": {
+    "count": 8,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "tool action": {
+    "count": 9,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "filename json": {
+    "count": 7,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-07-31"
+  },
+  "params filename": {
+    "count": 10,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "action params": {
+    "count": 22,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "parentdocumentid null": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "params query": {
+    "count": 11,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "example com": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "params json": {
+    "count": 8,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-05"
+  },
+  "large language": {
+    "count": 13,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "language models": {
+    "count": 34,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json",
+      "accenture_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "system responds": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-03"
+  },
+  "building second": {
+    "count": 8,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "embedded within": {
+    "count": 5,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-02"
+  },
+  "first wave": {
+    "count": 24,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "language model": {
+    "count": 27,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor",
+      "srini_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "offloading cognition": {
+    "count": 5,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-07-25"
+  },
+  "baba vrat": {
+    "count": 8,
+    "files": [
+      "second_wave_notes.json",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-07-31"
+  },
+  "sai baba": {
+    "count": 11,
+    "files": [
+      "second_wave_notes.json",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-07-31"
+  },
+  "real world": {
+    "count": 6,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "surface level": {
+    "count": 6,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "thread score": {
+    "count": 7,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-07-25"
+  },
+  "persistent memory": {
+    "count": 10,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "system level": {
+    "count": 6,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "across time": {
+    "count": 6,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "core message": {
+    "count": 10,
+    "files": [
+      "buffer_engine",
+      "terminal_tool",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-10"
+  },
+  "generate text": {
+    "count": 6,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "common crawl": {
+    "count": 5,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "tools like": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "second_wave_notes.json"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "across tools": {
+    "count": 19,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor",
+      "nylasinbox"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "looks like": {
+    "count": 7,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "without memory": {
+    "count": 6,
+    "files": [
+      "second_wave_notes.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "stitching together": {
+    "count": 7,
+    "files": [
+      "accenture_notes.json",
+      "json_manager",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-03"
+  },
+  "system executes": {
+    "count": 5,
+    "files": [
+      "thesis_prepublication.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-12"
+  },
+  "search notes": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "multiple tools": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "incorporate critical": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "workflow components": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "loop process": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "critical human": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "coordinating multiple": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "components services": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "orchestration framework": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "application involves": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "together gen": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "involves coordinating": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "includes workflow": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "would incorporate": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "usage scenarios": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "steps several": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "process flows": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "gen application": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "enablement stitching": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "application enablement": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "multiple components": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "framework key": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "several frameworks": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "still nascent": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "multiple usage": {
+    "count": 5,
+    "files": [
+      "accenture_notes.json",
+      "json_manager"
+    ],
+    "last_seen": "2025-07-29"
+  },
+  "build tools": {
+    "count": 16,
+    "files": [
+      "outline_editor",
+      "nylasinbox"
+    ],
+    "last_seen": "2025-08-01"
+  },
+  "private beta": {
+    "count": 18,
+    "files": [
+      "outline_editor",
+      "nylasinbox",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "operating system": {
+    "count": 21,
+    "files": [
+      "nylasinbox",
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "step tasks": {
+    "count": 17,
+    "files": [
+      "outline_editor",
+      "nylasinbox"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "without ever": {
+    "count": 7,
+    "files": [
+      "nylasinbox",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-04"
+  },
+  "end end": {
+    "count": 6,
+    "files": [
+      "outline_editor",
+      "thread_log.json",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "bound tools": {
+    "count": 5,
+    "files": [
+      "thesis_prepublication.json",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-12"
+  },
+  "weekly review": {
+    "count": 6,
+    "files": [
+      "outline_editor",
+      "thread_log.json",
+      "second_wave_notes.json",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "one command": {
+    "count": 7,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-11"
+  },
+  "graphical user": {
+    "count": 7,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "get text": {
+    "count": 11,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "data json": {
+    "count": 11,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-09"
+  },
+  "human computer": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "command line": {
+    "count": 7,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "computer interaction": {
+    "count": 5,
+    "files": [
+      "outline_editor",
+      "terminal_tool"
+    ],
+    "last_seen": "2025-08-08"
+  },
+  "width height": {
+    "count": 14,
+    "files": [
+      "terminal_tool",
+      "outline_editor"
+    ],
+    "last_seen": "2025-08-09"
+  }
+}

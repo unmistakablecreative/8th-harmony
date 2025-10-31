@@ -50,7 +50,7 @@ echo ""
 
 # 5. Install Python dependencies
 echo "→ Installing Python dependencies..."
-pip3 install -r requirements.txt
+python3 -m pip install -r requirements.txt
 echo "✓ Dependencies installed"
 echo ""
 

@@ -1,0 +1,913 @@
+import sys
+import json
+import os
+import argparse
+import subprocess
+from datetime import datetime
+
+
+def assign_task(params):
+    """
+    GPT assigns a task to Claude Code queue.
+
+    GPT just needs to provide:
+    - task_id: unique identifier (required)
+    - description: what Claude should do (required)
+    - priority: high/medium/low (optional, defaults to medium)
+    - context: any extra info Claude needs (optional, defaults to {})
+    - create_output_doc: if true, Claude should create a summary doc in Outline #Inbox (optional, defaults to false)
+
+    Example from GPT:
+    {
+      "tool_name": "claude_assistant",
+      "action": "assign_task",
+      "params": {
+        "task_id": "create_growth_plan",
+        "description": "Extract frameworks from Endless Audience course doc and create growth plan in Outline #Inbox",
+        "priority": "high",
+        "create_output_doc": true,
+        "context": {
+          "source_doc_id": "c17ca202-ad89-43d6-8a1c-c957bda51ec3"
+        }
+      }
+    }
+    """
+    task_id = params.get("task_id")
+    description = params.get("description")
+    priority = params.get("priority", "medium")
+    create_output_doc = params.get("create_output_doc", False)
+
+    # Default context with instructions to read claude_instructions.md
+    default_context = {
+        "instructions": "Read /Users/srinivas/Orchestrate Github/orchestrate-jarvis/data/claude_instructions.md before starting"
+    }
+
+    # Use provided context or default
+    context = params.get("context", {})
+    if not context:
+        context = default_context
+    elif "instructions" not in context:
+        context["instructions"] = default_context["instructions"]
+
+    # Add create_output_doc flag to context
+    context["create_output_doc"] = create_output_doc
+    
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+    if not description:
+        return {"status": "error", "message": "❌ Missing required field: description"}
+    
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    os.makedirs(os.path.dirname(queue_file), exist_ok=True)
+    
+    # Load existing queue
+    if os.path.exists(queue_file):
+        with open(queue_file, 'r', encoding='utf-8') as f:
+            queue = json.load(f)
+    else:
+        queue = {"tasks": {}}
+    
+    # Add task
+    queue["tasks"][task_id] = {
+        "status": "queued",
+        "created_at": datetime.now().isoformat(),
+        "assigned_by": "GPT",
+        "priority": priority,
+        "description": description,
+        "context": context
+    }
+    
+    # Save queue
+    with open(queue_file, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, indent=2)
+    
+    return {
+        "status": "success",
+        "message": f"✅ Task '{task_id}' assigned to Claude Code queue",
+        "task_id": task_id,
+        "next_step": "Call execute_queue to trigger Claude Code processing"
+    }
+
+
+def assign_batch_tasks(params):
+    """
+    Assign multiple tasks to Claude Code queue in one call.
+
+    GPT just needs to provide:
+    - tasks: list of task dictionaries, each with:
+      - task_id: unique identifier (required)
+      - description: what Claude should do (required)
+      - priority: high/medium/low (optional, defaults to medium)
+      - context: any extra info Claude needs (optional)
+
+    Example from GPT:
+    {
+      "tool_name": "claude_assistant",
+      "action": "assign_batch_tasks",
+      "params": {
+        "tasks": [
+          {
+            "task_id": "task1",
+            "description": "Do thing 1",
+            "priority": "high"
+          },
+          {
+            "task_id": "task2",
+            "description": "Do thing 2",
+            "context": {"doc_id": "123"}
+          }
+        ]
+      }
+    }
+    """
+    tasks = params.get("tasks", [])
+
+    if not tasks:
+        return {"status": "error", "message": "❌ Missing required field: tasks (must be a list)"}
+
+    if not isinstance(tasks, list):
+        return {"status": "error", "message": "❌ tasks must be a list of task dictionaries"}
+
+    # Validate all tasks before processing
+    for i, task in enumerate(tasks):
+        if not isinstance(task, dict):
+            return {"status": "error", "message": f"❌ Task at index {i} must be a dictionary"}
+        if not task.get("task_id"):
+            return {"status": "error", "message": f"❌ Task at index {i} missing required field: task_id"}
+        if not task.get("description"):
+            return {"status": "error", "message": f"❌ Task at index {i} missing required field: description"}
+
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    os.makedirs(os.path.dirname(queue_file), exist_ok=True)
+
+    # Load existing queue
+    if os.path.exists(queue_file):
+        with open(queue_file, 'r', encoding='utf-8') as f:
+            queue = json.load(f)
+    else:
+        queue = {"tasks": {}}
+
+    # Default context with instructions
+    default_context = {
+        "instructions": "Read /Users/srinivas/Orchestrate Github/orchestrate-jarvis/data/claude_instructions.md before starting"
+    }
+
+    # Add all tasks
+    added_tasks = []
+    for task in tasks:
+        task_id = task["task_id"]
+        description = task["description"]
+        priority = task.get("priority", "medium")
+        create_output_doc = task.get("create_output_doc", False)
+
+        # Handle context
+        context = task.get("context", {})
+        if not context:
+            context = default_context
+        elif "instructions" not in context:
+            context["instructions"] = default_context["instructions"]
+
+        # Add create_output_doc flag to context
+        context["create_output_doc"] = create_output_doc
+
+        queue["tasks"][task_id] = {
+            "status": "queued",
+            "created_at": datetime.now().isoformat(),
+            "assigned_by": "GPT",
+            "priority": priority,
+            "description": description,
+            "context": context
+        }
+        added_tasks.append(task_id)
+
+    # Save queue
+    with open(queue_file, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, indent=2)
+
+    return {
+        "status": "success",
+        "message": f"✅ {len(added_tasks)} task(s) assigned to Claude Code queue",
+        "task_ids": added_tasks,
+        "next_step": "Call execute_queue to trigger Claude Code processing"
+    }
+
+
+def check_task_status(params):
+    """
+    Check status of a task assigned to Claude.
+    
+    GPT just needs:
+    - task_id: the task to check (required)
+    
+    Returns:
+    - pending: Claude hasn't started yet
+    - in_progress: Claude is working on it
+    - done: Claude completed it
+    - error: Claude failed
+    
+    Example from GPT:
+    {
+      "tool_name": "claude_assistant",
+      "action": "check_task_status",
+      "params": {
+        "task_id": "create_growth_plan"
+      }
+    }
+    """
+    task_id = params.get("task_id")
+    
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+    
+    # Check queue
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    if os.path.exists(queue_file):
+        with open(queue_file, 'r', encoding='utf-8') as f:
+            queue = json.load(f)
+            if task_id in queue.get("tasks", {}):
+                task_data = queue["tasks"][task_id]
+                return {
+                    "status": "success",
+                    "task_id": task_id,
+                    "task_status": task_data["status"],
+                    "created_at": task_data.get("created_at"),
+                    "description": task_data.get("description")
+                }
+    
+    # Check results
+    results_file = os.path.join(os.getcwd(), "data/claude_task_results.json")
+    if os.path.exists(results_file):
+        with open(results_file, 'r', encoding='utf-8') as f:
+            results = json.load(f)
+            if task_id in results.get("results", {}):
+                result_data = results["results"][task_id]
+                return {
+                    "status": "success",
+                    "task_id": task_id,
+                    "task_status": "done",
+                    "completed_at": result_data.get("completed_at"),
+                    "execution_time_seconds": result_data.get("execution_time_seconds"),
+                    "output": result_data.get("output")
+                }
+    
+    return {
+        "status": "error",
+        "message": f"❌ Task '{task_id}' not found in queue or results"
+    }
+
+
+def get_task_result(params):
+    """
+    Get the full result data from a completed Claude task.
+    
+    GPT just needs:
+    - task_id: the completed task (required)
+    
+    Returns full completion report including:
+    - status: done/error
+    - actions_taken: what Claude did
+    - output: any data Claude produced
+    - errors: if anything went wrong
+    
+    Example from GPT:
+    {
+      "tool_name": "claude_assistant",
+      "action": "get_task_result",
+      "params": {
+        "task_id": "create_growth_plan"
+      }
+    }
+    """
+    task_id = params.get("task_id")
+    
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+    
+    results_file = os.path.join(os.getcwd(), "data/claude_task_results.json")
+    
+    if not os.path.exists(results_file):
+        return {
+            "status": "error",
+            "message": f"❌ No results file found. Task '{task_id}' may not be complete yet."
+        }
+    
+    with open(results_file, 'r', encoding='utf-8') as f:
+        results = json.load(f)
+    
+    if task_id not in results.get("results", {}):
+        return {
+            "status": "error",
+            "message": f"❌ No result found for task '{task_id}'. Check if task is complete with check_task_status."
+        }
+    
+    return {
+        "status": "success",
+        "task_id": task_id,
+        "result": results["results"][task_id]
+    }
+
+
+def list_pending_tasks(params):
+    """
+    List all tasks waiting for Claude to process.
+    
+    GPT doesn't need to pass anything.
+    
+    Returns list of all pending tasks with their descriptions.
+    
+    Example from GPT:
+    {
+      "tool_name": "claude_assistant",
+      "action": "list_pending_tasks",
+      "params": {}
+    }
+    """
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    
+    if not os.path.exists(queue_file):
+        return {
+            "status": "success",
+            "message": "✅ No pending tasks",
+            "pending_tasks": [],
+            "task_count": 0
+        }
+    
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+    
+    pending = [
+        {
+            "task_id": task_id,
+            "description": task_data["description"],
+            "priority": task_data.get("priority", "medium"),
+            "created_at": task_data.get("created_at")
+        }
+        for task_id, task_data in queue.get("tasks", {}).items()
+        if task_data.get("status") == "pending"
+    ]
+    
+    return {
+        "status": "success",
+        "pending_tasks": pending,
+        "task_count": len(pending)
+    }
+
+
+def mark_task_pending(params):
+    """
+    Mark a queued task as pending (in progress).
+
+    Claude calls this when starting work on a task.
+
+    Required:
+    - task_id: the task to mark as pending
+
+    Example from Claude:
+    {
+      "tool_name": "claude_assistant",
+      "action": "mark_task_pending",
+      "params": {
+        "task_id": "create_growth_plan"
+      }
+    }
+    """
+    task_id = params.get("task_id")
+
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+
+    if not os.path.exists(queue_file):
+        return {"status": "error", "message": "❌ No task queue found"}
+
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+
+    if task_id not in queue.get("tasks", {}):
+        return {"status": "error", "message": f"❌ Task '{task_id}' not found in queue"}
+
+    task = queue["tasks"][task_id]
+    if task["status"] != "queued":
+        return {
+            "status": "error",
+            "message": f"❌ Task '{task_id}' is not queued (current status: {task['status']})"
+        }
+
+    queue["tasks"][task_id]["status"] = "pending"
+    queue["tasks"][task_id]["started_at"] = datetime.now().isoformat()
+
+    with open(queue_file, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, indent=2)
+
+    return {
+        "status": "success",
+        "message": f"✅ Task '{task_id}' marked as pending"
+    }
+
+
+def cancel_task(params):
+    """
+    Remove a task from Claude's queue.
+    
+    GPT just needs:
+    - task_id: task to cancel (required)
+    
+    Example from GPT:
+    {
+      "tool_name": "claude_assistant",
+      "action": "cancel_task",
+      "params": {
+        "task_id": "create_growth_plan"
+      }
+    }
+    """
+    task_id = params.get("task_id")
+    
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+    
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    
+    if not os.path.exists(queue_file):
+        return {"status": "error", "message": "❌ No task queue found"}
+    
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+    
+    if task_id not in queue.get("tasks", {}):
+        return {"status": "error", "message": f"❌ Task '{task_id}' not found in queue"}
+    
+    del queue["tasks"][task_id]
+    
+    with open(queue_file, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, indent=2)
+    
+    return {
+        "status": "success",
+        "message": f"✅ Task '{task_id}' removed from queue"
+    }
+
+
+def process_queue(params):
+    """
+    Claude calls this to get all queued tasks.
+
+    Returns list of tasks for Claude to process.
+
+    Claude will then:
+    1. Call mark_task_pending when starting a task
+    2. Execute each task
+    3. Call log_task_completion when done
+    """
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+
+    if not os.path.exists(queue_file):
+        return {
+            "status": "success",
+            "message": "✅ No tasks in queue",
+            "pending_tasks": [],
+            "task_count": 0
+        }
+
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+
+    # Look for queued tasks (not yet started)
+    pending = [
+        {
+            "task_id": task_id,
+            "description": task_data["description"],
+            "context": task_data.get("context", {}),
+            "priority": task_data.get("priority", "medium"),
+            "created_at": task_data.get("created_at")
+        }
+        for task_id, task_data in queue.get("tasks", {}).items()
+        if task_data.get("status") == "queued"
+    ]
+    
+    if not pending:
+        return {
+            "status": "success",
+            "message": "✅ No pending tasks",
+            "pending_tasks": [],
+            "task_count": 0
+        }
+    
+    return {
+        "status": "success",
+        "message": f"Found {len(pending)} pending task(s)",
+        "pending_tasks": pending,
+        "task_count": len(pending)
+    }
+
+
+def execute_queue(params):
+    """
+    Execute all pending tasks by launching Claude Code in background.
+    Returns immediately - Claude processes tasks asynchronously.
+    
+    Fire-and-forget pattern like ideogram_tool.generate_batch():
+    - subprocess.Popen (not subprocess.run)
+    - start_new_session=True (fully detach)
+    - stdout/stderr=DEVNULL (don't wait for output)
+    - Returns "started" status immediately
+    """
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    
+    if not os.path.exists(queue_file):
+        return {
+            "status": "success",
+            "message": "✅ No tasks in queue",
+            "task_count": 0
+        }
+    
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+    
+    # Look for queued tasks
+    pending = [
+        {
+            "task_id": task_id,
+            "description": task_data["description"]
+        }
+        for task_id, task_data in queue.get("tasks", {}).items()
+        if task_data.get("status") == "queued"
+    ]
+    
+    if not pending:
+        return {
+            "status": "success",
+            "message": "✅ No pending tasks",
+            "task_count": 0
+        }
+    
+    # Build command
+    project_root = os.getcwd()
+    
+    prompt = (
+        "Read data/claude_instructions.md for your task instructions. "
+        "Process all pending tasks from data/claude_task_queue.json. "
+        "Use execution_hub.py to call tools. "
+        "Log completion for each task using tools/claude_assistant.py log_task_completion."
+    )
+    
+    claude_command = [
+        "claude",
+        "-p",
+        prompt,
+        "--permission-mode",
+        "acceptEdits",
+        "--allowedTools",
+        "Bash,Read,Write,Edit"
+    ]
+    
+    try:
+        # Fire and forget - Popen returns immediately, Claude runs in background
+        subprocess.Popen(
+            claude_command,
+            cwd=project_root,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True  # Fully detach from parent process
+        )
+        
+        # Return immediately - don't wait
+        return {
+            "status": "started",
+            "message": f"🚀 Claude Code processing {len(pending)} task(s) in background",
+            "pending_task_ids": [t["task_id"] for t in pending],
+            "task_count": len(pending),
+            "note": "Use check_task_status or get_task_result to see completion"
+        }
+        
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"❌ Failed to start: {str(e)}",
+            "pending_task_ids": [t["task_id"] for t in pending]
+        }
+
+
+def log_task_completion(params):
+    """
+    Claude calls this when a task is complete.
+    
+    Claude needs to provide:
+    - task_id: the task that was completed (required)
+    - status: "done" or "error" (required)
+    - actions_taken: list of what Claude did (required)
+    - output: any data produced (optional)
+    - errors: if status is "error", what went wrong (optional)
+    - execution_time_seconds: how long it took (optional)
+    """
+    task_id = params.get("task_id")
+    status = params.get("status")
+    actions_taken = params.get("actions_taken", [])
+    output = params.get("output", {})
+    errors = params.get("errors")
+    execution_time = params.get("execution_time_seconds", 0)
+    
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+    if not status:
+        return {"status": "error", "message": "❌ Missing required field: status"}
+    
+    # Update queue status
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+    if os.path.exists(queue_file):
+        with open(queue_file, 'r', encoding='utf-8') as f:
+            queue = json.load(f)
+        
+        if task_id in queue.get("tasks", {}):
+            queue["tasks"][task_id]["status"] = status
+            queue["tasks"][task_id]["completed_at"] = datetime.now().isoformat()
+            
+            with open(queue_file, 'w', encoding='utf-8') as f:
+                json.dump(queue, f, indent=2)
+    
+    # Write result
+    results_file = os.path.join(os.getcwd(), "data/claude_task_results.json")
+    
+    if os.path.exists(results_file):
+        with open(results_file, 'r', encoding='utf-8') as f:
+            results = json.load(f)
+    else:
+        results = {"results": {}}
+    
+    results["results"][task_id] = {
+        "status": status,
+        "completed_at": datetime.now().isoformat(),
+        "execution_time_seconds": execution_time,
+        "actions_taken": actions_taken,
+        "output": output,
+        "errors": errors
+    }
+    
+    with open(results_file, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2)
+    
+    return {
+        "status": "success",
+        "message": f"✅ Task '{task_id}' completion logged with status: {status}"
+    }
+
+
+def main():
+    import argparse, json
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action')
+    parser.add_argument('--params')
+    args = parser.parse_args()
+    params = json.loads(args.params) if args.params else {}
+
+    if args.action == 'assign_task':
+        result = assign_task(params)
+    elif args.action == 'assign_batch_tasks':
+        result = assign_batch_tasks(params)
+    elif args.action == 'check_task_status':
+        result = check_task_status(params)
+    elif args.action == 'get_task_result':
+        result = get_task_result(params)
+    elif args.action == 'list_pending_tasks':
+        result = list_pending_tasks(params)
+    elif args.action == 'mark_task_pending':
+        result = mark_task_pending(params)
+    elif args.action == 'cancel_task':
+        result = cancel_task(params)
+    elif args.action == 'process_queue':
+        result = process_queue(params)
+    elif args.action == 'execute_queue':
+        result = execute_queue(params)
+    elif args.action == 'log_task_completion':
+        result = log_task_completion(params)
+    elif args.action == 'search_tasks':
+        result = search_tasks(params)
+    elif args.action == 'retry_failed_task':
+        result = retry_failed_task(params)
+    else:
+        result = {'status': 'error', 'message': f'Unknown action {args.action}'}
+
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == '__main__':
+    main()
+    Mark a task as pending (Claude is starting to work on it).
+
+    Changes task status from queued -> pending.
+    Claude should call this when starting work on a task.
+
+    Lifecycle: queued -> pending -> done/error
+
+    Example:
+    {
+      "tool_name": "claude_assistant",
+      "action": "mark_task_pending",
+      "params": {
+        "task_id": "create_growth_plan"
+      }
+    }
+    """
+    import os
+    import json
+    from datetime import datetime
+
+    task_id = params.get("task_id")
+
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+
+    if not os.path.exists(queue_file):
+        return {"status": "error", "message": "❌ No task queue found"}
+
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+
+    if task_id not in queue.get("tasks", {}):
+        return {"status": "error", "message": f"❌ Task '{task_id}' not found in queue"}
+
+    task_data = queue["tasks"][task_id]
+
+    # Can mark queued or pending tasks as pending (idempotent)
+    if task_data.get("status") not in ["queued", "pending"]:
+        return {
+            "status": "error",
+            "message": f"❌ Task '{task_id}' cannot be marked pending (current: {task_data.get('status')})"
+        }
+
+    # Update status to pending
+    queue["tasks"][task_id]["status"] = "pending"
+    if "started_at" not in queue["tasks"][task_id]:
+        queue["tasks"][task_id]["started_at"] = datetime.now().isoformat()
+
+    with open(queue_file, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, indent=2)
+
+    return {
+        "status": "success",
+        "message": f"✅ Task '{task_id}' marked as pending"
+    }
+
+
+# Also add functions for search and error recovery
+
+def search_tasks(params):
+    """
+    Search and filter tasks by status, priority, date range, or text.
+
+    Accepts:
+    - status: filter by status (queued/pending/done/error)
+    - priority: filter by priority (high/medium/low)
+    - text_search: search in description
+    - created_after: ISO date string
+    - created_before: ISO date string
+
+    Example:
+    {
+      "tool_name": "claude_assistant",
+      "action": "search_tasks",
+      "params": {
+        "status": "pending",
+        "priority": "high"
+      }
+    }
+    """
+    import os
+    import json
+    from datetime import datetime
+
+    status_filter = params.get("status")
+    priority_filter = params.get("priority")
+    text_search = params.get("text_search", "").lower()
+    created_after = params.get("created_after")
+    created_before = params.get("created_before")
+
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+
+    if not os.path.exists(queue_file):
+        return {
+            "status": "success",
+            "message": "✅ No tasks found",
+            "tasks": [],
+            "task_count": 0
+        }
+
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+
+    matched_tasks = []
+
+    for task_id, task_data in queue.get("tasks", {}).items():
+        # Apply filters
+        if status_filter and task_data.get("status") != status_filter:
+            continue
+
+        if priority_filter and task_data.get("priority") != priority_filter:
+            continue
+
+        if text_search and text_search not in task_data.get("description", "").lower():
+            continue
+
+        if created_after:
+            task_created = task_data.get("created_at", "")
+            if task_created < created_after:
+                continue
+
+        if created_before:
+            task_created = task_data.get("created_at", "")
+            if task_created > created_before:
+                continue
+
+        matched_tasks.append({
+            "task_id": task_id,
+            "status": task_data.get("status"),
+            "priority": task_data.get("priority"),
+            "description": task_data.get("description"),
+            "created_at": task_data.get("created_at"),
+            "started_at": task_data.get("started_at"),
+            "completed_at": task_data.get("completed_at")
+        })
+
+    return {
+        "status": "success",
+        "tasks": matched_tasks,
+        "task_count": len(matched_tasks)
+    }
+
+
+def retry_failed_task(params):
+    """
+    Retry a failed task by resetting its status from error back to queued.
+
+    Accepts:
+    - task_id: the task to retry (required)
+
+    Tracks retry_count and limits retries to 3 attempts.
+
+    Example:
+    {
+      "tool_name": "claude_assistant",
+      "action": "retry_failed_task",
+      "params": {
+        "task_id": "create_growth_plan"
+      }
+    }
+    """
+    import os
+    import json
+    from datetime import datetime
+
+    task_id = params.get("task_id")
+
+    if not task_id:
+        return {"status": "error", "message": "❌ Missing required field: task_id"}
+
+    queue_file = os.path.join(os.getcwd(), "data/claude_task_queue.json")
+
+    if not os.path.exists(queue_file):
+        return {"status": "error", "message": "❌ No task queue found"}
+
+    with open(queue_file, 'r', encoding='utf-8') as f:
+        queue = json.load(f)
+
+    if task_id not in queue.get("tasks", {}):
+        return {"status": "error", "message": f"❌ Task '{task_id}' not found in queue"}
+
+    task_data = queue["tasks"][task_id]
+
+    # Can only retry error/done tasks
+    if task_data.get("status") not in ["error", "done"]:
+        return {
+            "status": "error",
+            "message": f"❌ Can only retry error or done tasks (current: {task_data.get('status')})"
+        }
+
+    # Check retry count
+    retry_count = task_data.get("retry_count", 0)
+    if retry_count >= 3:
+        return {
+            "status": "error",
+            "message": f"❌ Task '{task_id}' has reached maximum retry limit (3 attempts)"
+        }
+
+    # Reset status to queued and increment retry count
+    queue["tasks"][task_id]["status"] = "queued"
+    queue["tasks"][task_id]["retry_count"] = retry_count + 1
+    queue["tasks"][task_id]["retried_at"] = datetime.now().isoformat()
+
+    # Remove completion fields
+    if "completed_at" in queue["tasks"][task_id]:
+        del queue["tasks"][task_id]["completed_at"]
+    if "started_at" in queue["tasks"][task_id]:
+        del queue["tasks"][task_id]["started_at"]
+
+    with open(queue_file, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, indent=2)
+
+    return {
+        "status": "success",
+        "message": f"✅ Task '{task_id}' reset to queued (retry {retry_count + 1}/3)"
+    }

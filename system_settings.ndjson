@@ -1,0 +1,46 @@
+{"tool": "outline_editor", "action": "__tool__", "script_path": "tools/outline_editor.py"}
+{"tool": "outline_editor", "action": "create_doc_from_queue", "script_path": "tools/outline_editor.py", "params": ["entry_key"], "description": "Process a document from outline queue by entry_key. Reads markdown file and creates doc in Outline."}
+{"tool": "outline_editor", "action": "process_queue", "script_path": "tools/outline_editor.py", "params": [], "description": "Process all pending documents in the outline queue."}
+{"tool": "outline_editor", "action": "get_doc", "script_path": "tools/outline_editor.py", "params": ["doc_id"], "description": "Retrieve a specific Outline document by ID."}
+{"tool": "outline_editor", "action": "search_docs", "script_path": "tools/outline_editor.py", "params": ["query"], "description": "Search Outline documents by query string."}
+{"tool": "outline_editor", "action": "update_doc", "script_path": "tools/outline_editor.py", "params": ["doc_id", "text"], "description": "Update an existing Outline document."}
+{"tool": "outline_editor", "action": "list_docs", "script_path": "tools/outline_editor.py", "params": [], "description": "List all Outline documents."}
+{"tool": "nylas_inboxv2", "action": "__tool__", "script_path": "tools/nylas_inboxv2.py"}
+{"tool": "nylas_inboxv2", "action": "check_email", "script_path": "tools/nylas_inboxv2.py", "params": ["limit"], "description": "Check recent emails from inbox."}
+{"tool": "nylas_inboxv2", "action": "send_email", "script_path": "tools/nylas_inboxv2.py", "params": ["to", "subject", "body"], "description": "Send an email to specified recipient."}
+{"tool": "nylas_inboxv2", "action": "reply_to_email", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id", "body"], "description": "Reply to a specific email message."}
+{"tool": "nylas_inboxv2", "action": "search_messages", "script_path": "tools/nylas_inboxv2.py", "params": ["query"], "description": "Search through email messages."}
+{"tool": "nylas_inboxv2", "action": "open_message", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"], "description": "Open and read a specific email message."}
+{"tool": "nylas_inboxv2", "action": "delete_email", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"], "description": "Delete an email message."}
+{"tool": "nylas_calendar", "action": "__tool__", "script_path": "tools/nylas_calendar.py"}
+{"tool": "nylas_calendar", "action": "list_upcoming_events", "script_path": "tools/nylas_calendar.py", "params": [], "description": "List upcoming calendar events."}
+{"tool": "nylas_calendar", "action": "book_event", "script_path": "tools/nylas_calendar.py", "params": ["title", "start_time", "end_time"], "description": "Book a new calendar event."}
+{"tool": "nylas_calendar", "action": "delete_event", "script_path": "tools/nylas_calendar.py", "params": ["event_id"], "description": "Delete a calendar event."}
+{"tool": "nylas_calendar", "action": "list_calendars", "script_path": "tools/nylas_calendar.py", "params": [], "description": "List all available calendars."}
+{"tool": "json_manager", "action": "__tool__", "script_path": "tools/json_manager.py"}
+{"tool": "json_manager", "action": "read_json_file", "script_path": "tools/json_manager.py", "params": ["filename"], "description": "Read entire JSON file contents."}
+{"tool": "json_manager", "action": "read_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key"], "description": "Read specific entry from JSON file."}
+{"tool": "json_manager", "action": "add_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key", "data"], "description": "Add new entry to JSON file."}
+{"tool": "json_manager", "action": "update_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key", "data"], "description": "Update existing entry in JSON file."}
+{"tool": "json_manager", "action": "delete_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key"], "description": "Delete entry from JSON file."}
+{"tool": "json_manager", "action": "search_json_entries", "script_path": "tools/json_manager.py", "params": ["filename", "query"], "description": "Search entries in JSON file."}
+{"tool": "json_manager", "action": "list_json_entries", "script_path": "tools/json_manager.py", "params": ["filename"], "description": "List all entries in JSON file."}
+{"tool": "terminal_tool", "action": "__tool__", "script_path": "tools/terminal_tool.py"}
+{"tool": "terminal_tool", "action": "run_terminal_command", "script_path": "tools/terminal_tool.py", "params": ["command"], "description": "Execute a terminal command."}
+{"tool": "terminal_tool", "action": "read_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename"], "description": "Read text file contents."}
+{"tool": "terminal_tool", "action": "write_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "content"], "description": "Write text to a file."}
+{"tool": "terminal_tool", "action": "append_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "content"], "description": "Append text to a file."}
+{"tool": "terminal_tool", "action": "list_files", "script_path": "tools/terminal_tool.py", "params": ["directory"], "description": "List files in a directory."}
+{"tool": "terminal_tool", "action": "find_file", "script_path": "tools/terminal_tool.py", "params": ["keyword"], "description": "Find files by keyword."}
+{"tool": "system_settings", "action": "__tool__", "script_path": "tools/system_settings.py"}
+{"tool": "system_settings", "action": "list_tools", "script_path": "tools/system_settings.py", "params": [], "description": "List all registered tools."}
+{"tool": "system_settings", "action": "list_actions", "script_path": "tools/system_settings.py", "params": ["tool_name"], "description": "List all actions for a specific tool."}
+{"tool": "system_settings", "action": "set_credential", "script_path": "tools/system_settings.py", "params": ["key", "value"], "description": "Set a credential value."}
+{"tool": "system_settings", "action": "add_tool", "script_path": "tools/system_settings.py", "params": ["tool_name", "script_path"], "description": "Register a new tool."}
+{"tool": "system_settings", "action": "add_action", "script_path": "tools/system_settings.py", "params": ["tool_name", "action_name", "params"], "description": "Add an action to a tool."}
+{"tool": "claude_assistant", "action": "__tool__", "script_path": "tools/claude_assistant.py"}
+{"tool": "claude_assistant", "action": "assign_task", "script_path": "tools/claude_assistant.py", "params": ["task_id", "description", "priority"], "description": "Assign a task to Claude Code assistant queue."}
+{"tool": "claude_assistant", "action": "check_task_status", "script_path": "tools/claude_assistant.py", "params": ["task_id"], "description": "Check status of a Claude task."}
+{"tool": "claude_assistant", "action": "get_task_result", "script_path": "tools/claude_assistant.py", "params": ["task_id"], "description": "Get result of a completed Claude task."}
+{"tool": "claude_assistant", "action": "cancel_task", "script_path": "tools/claude_assistant.py", "params": ["task_id"], "description": "Cancel a pending Claude task."}
+{"tool": "claude_assistant", "action": "process_queue", "script_path": "tools/claude_assistant.py", "params": [], "description": "Process all pending tasks in Claude queue."}

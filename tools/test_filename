@@ -1,0 +1,38 @@
+[
+  {
+    "url": "t",
+    "output_name": "test_tool_name_t"
+  },
+  {
+    "url": "e",
+    "output_name": "test_tool_name_e"
+  },
+  {
+    "url": "s",
+    "output_name": "test_tool_name_s"
+  },
+  {
+    "url": "t",
+    "output_name": "test_tool_name_t"
+  },
+  {
+    "url": "_",
+    "output_name": "test_tool_name__"
+  },
+  {
+    "url": "u",
+    "output_name": "test_tool_name_u"
+  },
+  {
+    "url": "r",
+    "output_name": "test_tool_name_r"
+  },
+  {
+    "url": "l",
+    "output_name": "test_tool_name_l"
+  },
+  {
+    "url": "s",
+    "output_name": "test_tool_name_s"
+  }
+]

@@ -1,0 +1,252 @@
+{
+  "entries": {
+    "create_outline_doc": {
+      "icon": "📝",
+      "intent": "create a new document",
+      "description": "Write markdown file to queue, then create document in Outline",
+      "tool_name": "outline_editor",
+      "action": "create_doc_from_queue",
+      "params": {
+        "entry_key": "{{entry_key}}"
+      }
+    },
+    "process_outline_queue": {
+      "icon": "⚡",
+      "intent": "process outline queue",
+      "description": "Process all pending documents in the outline queue",
+      "tool_name": "outline_editor",
+      "action": "process_queue",
+      "params": {}
+    },
+    "search_documents": {
+      "icon": "🔍",
+      "intent": "search for {{query}}",
+      "description": "Search Outline documents",
+      "tool_name": "outline_editor",
+      "action": "search_docs",
+      "params": {
+        "query": "{{query}}"
+      }
+    },
+    "get_document": {
+      "icon": "📄",
+      "intent": "get document {{doc_id}}",
+      "description": "Retrieve a specific Outline document",
+      "tool_name": "outline_editor",
+      "action": "get_doc",
+      "params": {
+        "doc_id": "{{doc_id}}"
+      }
+    },
+    "check_email": {
+      "icon": "📧",
+      "intent": "check my email",
+      "description": "Check recent emails from inbox",
+      "tool_name": "nylas_inboxv2",
+      "action": "check_email",
+      "params": {
+        "limit": 10
+      }
+    },
+    "send_email": {
+      "icon": "✉️",
+      "intent": "send email to {{recipient}}",
+      "description": "Send an email",
+      "tool_name": "nylas_inboxv2",
+      "action": "send_email",
+      "params": {
+        "to": "{{recipient}}",
+        "subject": "{{subject}}",
+        "body": "{{body}}"
+      }
+    },
+    "reply_to_email": {
+      "icon": "↩️",
+      "intent": "reply to email {{message_id}}",
+      "description": "Reply to a specific email",
+      "tool_name": "nylas_inboxv2",
+      "action": "reply_to_email",
+      "params": {
+        "message_id": "{{message_id}}",
+        "body": "{{body}}"
+      }
+    },
+    "search_emails": {
+      "icon": "🔎",
+      "intent": "search emails for {{query}}",
+      "description": "Search through emails",
+      "tool_name": "nylas_inboxv2",
+      "action": "search_messages",
+      "params": {
+        "query": "{{query}}"
+      }
+    },
+    "list_calendar_events": {
+      "icon": "📅",
+      "intent": "show my calendar",
+      "description": "View upcoming calendar events",
+      "tool_name": "nylas_calendar",
+      "action": "list_upcoming_events",
+      "params": {}
+    },
+    "book_calendar_event": {
+      "icon": "🗓️",
+      "intent": "create calendar event",
+      "description": "Book a new calendar event",
+      "tool_name": "nylas_calendar",
+      "action": "book_event",
+      "params": {
+        "title": "{{title}}",
+        "start_time": "{{start_time}}",
+        "end_time": "{{end_time}}"
+      }
+    },
+    "read_json": {
+      "icon": "📂",
+      "intent": "read {{filename}}",
+      "description": "Read entire JSON file",
+      "tool_name": "json_manager",
+      "action": "read_json_file",
+      "params": {
+        "filename": "{{filename}}"
+      }
+    },
+    "read_json_entry": {
+      "icon": "📋",
+      "intent": "read entry {{entry_key}} from {{filename}}",
+      "description": "Read specific entry from JSON file",
+      "tool_name": "json_manager",
+      "action": "read_json_entry",
+      "params": {
+        "filename": "{{filename}}",
+        "entry_key": "{{entry_key}}"
+      }
+    },
+    "add_json_entry": {
+      "icon": "➕",
+      "intent": "add entry to {{filename}}",
+      "description": "Add new entry to JSON file",
+      "tool_name": "json_manager",
+      "action": "add_json_entry",
+      "params": {
+        "filename": "{{filename}}",
+        "entry_key": "{{entry_key}}",
+        "data": "{{data}}"
+      }
+    },
+    "update_json_entry": {
+      "icon": "💾",
+      "intent": "update {{entry_key}} in {{filename}}",
+      "description": "Update existing entry in JSON file",
+      "tool_name": "json_manager",
+      "action": "update_json_entry",
+      "params": {
+        "filename": "{{filename}}",
+        "entry_key": "{{entry_key}}",
+        "data": "{{data}}"
+      }
+    },
+    "search_json": {
+      "icon": "🔍",
+      "intent": "search {{filename}} for {{query}}",
+      "description": "Search entries in JSON file",
+      "tool_name": "json_manager",
+      "action": "search_json_entries",
+      "params": {
+        "filename": "{{filename}}",
+        "query": "{{query}}"
+      }
+    },
+    "run_command": {
+      "icon": "⚡",
+      "intent": "run {{command}}",
+      "description": "Execute a terminal command",
+      "tool_name": "terminal_tool",
+      "action": "run_terminal_command",
+      "params": {
+        "command": "{{command}}"
+      }
+    },
+    "read_file": {
+      "icon": "📖",
+      "intent": "read file {{filename}}",
+      "description": "Read text file contents",
+      "tool_name": "terminal_tool",
+      "action": "read_file_text",
+      "params": {
+        "filename": "{{filename}}"
+      }
+    },
+    "write_file": {
+      "icon": "✍️",
+      "intent": "write to file {{filename}}",
+      "description": "Write text to a file",
+      "tool_name": "terminal_tool",
+      "action": "write_file_text",
+      "params": {
+        "filename": "{{filename}}",
+        "content": "{{content}}"
+      }
+    },
+    "list_files": {
+      "icon": "📁",
+      "intent": "list files in {{directory}}",
+      "description": "List files in a directory",
+      "tool_name": "terminal_tool",
+      "action": "list_files",
+      "params": {
+        "directory": "{{directory}}"
+      }
+    },
+    "list_tools": {
+      "icon": "⚙️",
+      "intent": "list available tools",
+      "description": "Show all registered tools",
+      "tool_name": "system_settings",
+      "action": "list_tools",
+      "params": {}
+    },
+    "list_tool_actions": {
+      "icon": "🔧",
+      "intent": "list actions for {{tool_name}}",
+      "description": "Show all actions for a specific tool",
+      "tool_name": "system_settings",
+      "action": "list_actions",
+      "params": {
+        "tool_name": "{{tool_name}}"
+      }
+    },
+    "assign_task_to_claude": {
+      "icon": "🤖",
+      "intent": "assign task to Claude",
+      "description": "Queue a task for Claude Code assistant",
+      "tool_name": "claude_assistant",
+      "action": "assign_task",
+      "params": {
+        "task_id": "{{task_id}}",
+        "description": "{{description}}",
+        "priority": "{{priority}}"
+      }
+    },
+    "check_claude_task": {
+      "icon": "📊",
+      "intent": "check task {{task_id}}",
+      "description": "Check status of a Claude task",
+      "tool_name": "claude_assistant",
+      "action": "check_task_status",
+      "params": {
+        "task_id": "{{task_id}}"
+      }
+    },
+    "get_claude_result": {
+      "icon": "📤",
+      "intent": "get result for {{task_id}}",
+      "description": "Get result of completed Claude task",
+      "tool_name": "claude_assistant",
+      "action": "get_task_result",
+      "params": {
+        "task_id": "{{task_id}}"
+      }
+    }
+  }
+}

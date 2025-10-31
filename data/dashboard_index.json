@@ -1,0 +1,29 @@
+{
+  "dashboard_items": [
+    {
+      "key": "intent_routes",
+      "source": "file",
+      "file": "data/intent_routes.json",
+      "display_type": "table",
+      "formatter": "intent_routes_table",
+      "priority": 1,
+      "description": "Available commands and tools"
+    },
+    {
+      "key": "calendar_events",
+      "source": "tool_action",
+      "tool": "nylas_calendar",
+      "action": "list_events",
+      "params": {},
+      "display_type": "list",
+      "formatter": "calendar_list",
+      "priority": 2,
+      "description": "Upcoming calendar events"
+    }
+  ],
+  "config": {
+    "refresh_interval_seconds": 300,
+    "enable_caching": true,
+    "default_limit": 10
+  }
+}

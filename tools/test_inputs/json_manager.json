@@ -1,0 +1,25 @@
+{
+  "create_json_file": {
+    "filename": "data/test_testfile.json"
+  },
+  "add_json_entry": {
+    "filename": "data/test_testfile.json",
+    "entry_key": "test_key",
+    "entry_data": {"foo": "bar"}
+  },
+  "read_json_file": {
+    "filename": "data/test_testfile.json"
+  },
+  "delete_json_entry": {
+    "filename": "data/test_testfile.json",
+    "entry_key": "test_key"
+  },
+  "write_json_file": {
+    "filename": "data/test_testfile2.json",
+    "entries": [{"hello": "world"}]
+  },
+  "merge_json_files": {
+    "filename": "data/test_merged.json",
+    "source_files": ["data/test_testfile.json", "data/test_testfile2.json"]
+  }
+}

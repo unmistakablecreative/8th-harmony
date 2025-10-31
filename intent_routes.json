@@ -1,0 +1,73 @@
+{
+  "tools": [
+    {
+      "name": "Outline Editor",
+      "description": "Create, edit, and manage Outline documents",
+      "tool": "outline_editor",
+      "examples": [
+        "Create a new document in Outline",
+        "Update my meeting notes doc",
+        "Search for documents about project planning"
+      ]
+    },
+    {
+      "name": "Email (Nylas)",
+      "description": "Read, send, and manage emails via Nylas",
+      "tool": "nylas_inboxv2",
+      "examples": [
+        "Check my recent emails",
+        "Send an email to [name]",
+        "Search emails from last week"
+      ]
+    },
+    {
+      "name": "Calendar (Nylas)",
+      "description": "Manage calendar events and meetings",
+      "tool": "nylas_calendar",
+      "examples": [
+        "Show my calendar for today",
+        "Create a meeting for tomorrow at 2pm",
+        "Check my availability this week"
+      ]
+    },
+    {
+      "name": "JSON Manager",
+      "description": "Read, write, and manipulate JSON data files",
+      "tool": "json_manager",
+      "examples": [
+        "Read data from contacts.json",
+        "Update the project_status.json file",
+        "Create a new JSON file"
+      ]
+    },
+    {
+      "name": "Terminal",
+      "description": "Execute terminal commands and scripts",
+      "tool": "terminal_tool",
+      "examples": [
+        "Run npm install",
+        "Check git status",
+        "List files in the current directory"
+      ]
+    },
+    {
+      "name": "System Settings",
+      "description": "Manage system configuration and settings",
+      "tool": "system_settings",
+      "examples": [
+        "Update my API credentials",
+        "Check system configuration",
+        "List available tools"
+      ]
+    }
+  ],
+  "dashboard": {
+    "title": "8th Harmony - OrchestrateOS",
+    "description": "Your AI execution layer for seamless workflow automation",
+    "quick_actions": [
+      "Check my emails",
+      "Show today's calendar",
+      "Create a new document"
+    ]
+  }
+}

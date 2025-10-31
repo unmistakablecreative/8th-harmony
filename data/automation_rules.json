@@ -1,0 +1,279 @@
+{
+  "rules": [
+    {
+      "trigger": {
+        "file": "data/podcast_index.json",
+        "type": "entry_added"
+      },
+      "action": {
+        "tool": "rename_audio_file",
+        "action": "rename_audio_file",
+        "params": {
+          "entry_key": "{entry_key}",
+          "index_file": "data/podcast_index.json"
+        }
+      }
+    },
+    {
+      "trigger": {
+        "type": "time",
+        "at": "11:05",
+        "description": "Daily GitHub backup push at 11:05"
+      },
+      "action": {
+        "tool": "github_sync",
+        "action": "push_repo",
+        "params": {
+          "repo_path": "/Users/srinivas/Orchestrate Github/orchestrate-jarvis/",
+          "message": "🕒 Scheduled auto-push at 11:05"
+        }
+      }
+    },
+    {
+      "trigger": {
+        "type": "entry_updated",
+        "file": "data/orchestrate_private_beta.json"
+      },
+      "condition": "new_entry.get(\"status\") == \"send_follow_up\"",
+      "action": {
+        "tool": "nylas_inbox",
+        "action": "send_email",
+        "params": {
+          "to": "{email}",
+          "subject": "Follow-up: Schedule Your OrchestrateOS Onboarding",
+          "body": "Hey \u2014 just circling back in case this got buried.\n\nYou were on the list for early access to OrchestrateOS, and I wanted to make sure you had a chance to schedule your onboarding call.\n\nHere\u2019s the link to grab a time:\n\ud83d\udc49 https://book.nylas.com/us/b0638254-2602-47c2-855d-d2fc03921d7e/srini-call\n\nLet me know if you have any questions before then \u2014 happy to help.\n\n\u2014Srini"
+        }
+      }
+    },
+    {
+      "trigger": {
+        "type": "time",
+        "at": "11:07"
+      },
+      "action": {
+        "steps": [
+          {
+            "tool": "nylas_calendar",
+            "action": "list_upcoming_events",
+            "params": {}
+          },
+          {
+            "type": "foreach",
+            "array": "prev.data",
+            "steps": [
+              {
+                "tool": "json_manager",
+                "action": "search_json_entries",
+                "params": {
+                  "filename": "data/orchestrate_private_beta.json",
+                  "search_value": "{item.participants[1].email}"
+                }
+              },
+              {
+                "tool": "json_manager",
+                "action": "update_json_entry",
+                "params": {
+                  "filename": "data/orchestrate_private_beta.json",
+                  "entry_key": "{item.participants[1].email}",
+                  "status": "onboarding_scheduled",
+                  "meeting_title": "{item.title}",
+                  "scheduled_time": "{item.when.start_time}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "trigger": {
+        "type": "entry_updated",
+        "file": "data/orchestrate_private_beta.json"
+      },
+      "condition": "new_entry.get('status') == 'send_invite'",
+      "action": {
+        "tool": "nylas_inbox",
+        "action": "send_email",
+        "params": {
+          "to": "{email}",
+          "subject": "Scheduling your OrchestrateOS Onboarding",
+          "body": "Thanks for your interest in OrchestrateOS. I'm really excited to have you as part of our initial beta user group.\n\nBelow is the link to schedule your personal onboarding:\n\nhttps://book.nylas.com/us/b0638254-2602-47c2-855d-d2fc03921d7e/srini-call\n\n---\n\n## \u2705 Step 1: Install Docker\n- Install [Docker Desktop](https://www.docker.com/products/docker-desktop)\n- Launch it and leave it running in the background\n\nOrchestrate runs in a secure container, and Docker is the engine.\n\n---\n\n## \u2705 Step 2: Set Up ngrok\n- [Create a free account](https://dashboard.ngrok.com/signup)\n- Copy your **authtoken**\n- Choose a custom domain (e.g. `clever-bear.ngrok-free.app`)\n- Save both\n\nBoth are free.\n\n\u2013Srini  \nFounder, OrchestrateOS\n\np.s. If you are interested in using tools like Outline Editor, you'll need a paid account which you can sign up for at https://www.getoutline.com/"
+        }
+      }
+    },
+    {
+      "trigger": {
+        "type": "entry_updated",
+        "file": "data/automation_test1.json"
+      },
+      "condition": "new_entry.get('status') == 'scheduled'",
+      "action": {
+        "steps": [
+          {
+            "tool": "json_manager",
+            "action": "read_json_file",
+            "params": {
+              "filename": "data/automation_test1.json"
+            }
+          },
+          {
+            "tool": "json_manager",
+            "action": "update_json_entry",
+            "params": {
+              "filename": "data/automation_test2.json",
+              "entry_key": "{entry_key}",
+              "stage": "onboarded",
+              "processed_from": "data/automation_test1.json",
+              "original_status": "{status}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "trigger": {
+        "type": "manual",
+        "description": "Triggered manually when Outline docs are created in Technical Documents or Content collections"
+      },
+      "action": {
+        "steps": [
+          {
+            "tool": "outline_editor",
+            "action": "list_collection_docs",
+            "params": {
+              "collection": "#Content"
+            }
+          },
+          {
+            "tool": "terminal_tool",
+            "action": "write_file_json",
+            "params": {
+              "path": "data/working_context_temp.json",
+              "data": "{prev.documents}"
+            }
+          },
+          {
+            "tool": "terminal_tool",
+            "action": "read_file_json",
+            "params": {
+              "path": "data/working_context.json"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "trigger": {
+        "type": "time",
+        "at": "08:00",
+        "description": "Daily inbox briefing generation at 8am"
+      },
+      "action": {
+        "steps": [
+          {
+            "tool": "nylas_inboxv2",
+            "action": "generate_inbox_summary",
+            "params": {}
+          },
+          {
+            "tool": "nylas_inboxv2",
+            "action": "generate_daily_brief",
+            "params": {}
+          }
+        ]
+      }
+    },
+    {
+      "trigger": {
+        "type": "entry_added",
+        "file": "data/claude_task_results.json"
+      },
+      "condition": "'outline_editor' in str(new_entry.get('actions_taken', [])) and ('Technical' in str(new_entry.get('output', {})) or 'Content' in str(new_entry.get('output', {})))",
+      "action": {
+        "steps": [
+          {
+            "tool": "outline_editor",
+            "action": "list_collection_docs",
+            "params": {
+              "collection": "#Content"
+            }
+          },
+          {
+            "tool": "outline_editor",
+            "action": "list_collection_docs",
+            "params": {
+              "collection": "#Technical Documents"
+            }
+          },
+          {
+            "tool": "json_manager",
+            "action": "update_json_entry",
+            "params": {
+              "filename": "data/working_context.json",
+              "entry_key": "last_sync",
+              "timestamp": "{entry_key}",
+              "trigger_source": "claude_task_completion"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "trigger": {
+        "type": "time",
+        "at": "16:15",
+        "description": "Daily task execution log at 4:15pm"
+      },
+      "action": {
+        "tool": "claude_assistant",
+        "action": "assign_task",
+        "params": {
+          "task_id": "daily_task_log",
+          "description": "Create a daily task execution log as a new child doc under Technical Documents. Read today's task results from data/claude_task_results.json, format them as a simple execution log (not a summary or analysis), and create a child doc with title 'Daily Task Log - YYYY-MM-DD'. Do not use execution_analyzer.",
+          "priority": "medium",
+          "context": {
+            "source_file": "data/claude_task_results.json",
+            "parent_doc_id": "0f8a9065-c753-4c29-bbd0-6cc54a17825c",
+            "output_format": "task_log"
+          }
+        }
+      }
+    },
+    {
+      "trigger": {
+        "type": "time",
+        "at": "16:30",
+        "description": "Daily self-learning analysis at 4:30pm"
+      },
+      "action": {
+        "tool": "claude_assistant",
+        "action": "daily_self_learning",
+        "params": {}
+      }
+    },
+    {
+      "trigger": {
+        "type": "time",
+        "at": "16:30",
+        "description": "Daily self-learning analysis at 4:30pm"
+      },
+      "action": {
+        "tool": "claude_assistant",
+        "action": "daily_self_learning",
+        "params": {}
+      }
+    },
+    {
+      "trigger": {
+        "type": "interval",
+        "minutes": 1,
+        "description": "Check for queued tasks every 1 minute and execute them"
+      },
+      "action": {
+        "tool": "claude_assistant",
+        "action": "execute_queue",
+        "params": {}
+      }
+    }
+  ]
+}

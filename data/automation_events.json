@@ -1,0 +1,17 @@
+{
+  "entry_added": {
+    "test": "key not in old_entry"
+  },
+  "entry_updated": {
+    "test": "new_entry != old_entry"
+  },
+  "time": {
+    "test": "True"
+  },
+  "event": {
+    "test": "True"
+  },
+  "file_created": {
+    "test": "filename not in old_files and filename.endswith('.md') and not filename.endswith('.formatted.md')"
+  }
+}

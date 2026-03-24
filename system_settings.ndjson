@@ -250,3 +250,10 @@
 {"tool": "nylas_calendar", "action": "create_scheduler_config", "script_path": "tools/nylas_calendar.py", "params": ["available_days_in_future", "buffer_after", "buffer_before", "days", "description", "duration_minutes", "end", "interval_minutes", "slug", "start", "timezone", "title"]}
 {"tool": "nylas_calendar", "action": "add_meet_link_to_scheduler", "script_path": "tools/nylas_calendar.py", "params": ["config_id"]}
 {"tool": "nylas_calendar", "action": "sync_to_dashboard", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "terminal_tool", "action": "__tool__", "script_path": "tools/terminal_tool.py"}
+{"tool": "terminal_tool", "action": "run_terminal_command", "script_path": "tools/terminal_tool.py", "params": ["command"]}
+{"tool": "terminal_tool", "action": "read_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename"]}
+{"tool": "terminal_tool", "action": "write_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "content"]}
+{"tool": "terminal_tool", "action": "append_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "content"]}
+{"tool": "terminal_tool", "action": "list_files", "script_path": "tools/terminal_tool.py", "params": ["directory"]}
+{"tool": "terminal_tool", "action": "find_file", "script_path": "tools/terminal_tool.py", "params": ["keyword"]}

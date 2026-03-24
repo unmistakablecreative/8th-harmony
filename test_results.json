@@ -1,0 +1,273 @@
+{
+  "passed": 28,
+  "total": 29,
+  "pass_rate": "96.6%",
+  "by_group": {
+    "json_manager": {
+      "passed": 7,
+      "failed": 0
+    },
+    "docs": {
+      "passed": 5,
+      "failed": 1
+    },
+    "bullet_journal": {
+      "passed": 3,
+      "failed": 0
+    },
+    "files": {
+      "passed": 5,
+      "failed": 0
+    },
+    "claude_assistant": {
+      "passed": 2,
+      "failed": 0
+    },
+    "system_settings": {
+      "passed": 2,
+      "failed": 0
+    },
+    "automation_engine": {
+      "passed": 2,
+      "failed": 0
+    },
+    "log_manager": {
+      "passed": 2,
+      "failed": 0
+    }
+  },
+  "results": [
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "create_json_file",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "add_json_entry",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "read_json_entry",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "update_json_entry",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "list_json_entries",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "search_json_entries",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "json_manager",
+      "tool": "json_manager",
+      "action": "read_json_file",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "docs",
+      "tool": "docs",
+      "action": "create_doc",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "docs",
+      "tool": "docs",
+      "action": "read_doc",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "docs",
+      "tool": "docs",
+      "action": "list_docs",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "docs",
+      "tool": "docs",
+      "action": "search_docs",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "docs",
+      "tool": "docs",
+      "action": "append_doc",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "docs",
+      "tool": "docs",
+      "action": "update_doc",
+      "passed": false,
+      "reason": "Got error: Ambiguous match: '...' appears 29 times. Provide a more specific string.",
+      "status_code": 200
+    },
+    {
+      "group": "bullet_journal",
+      "tool": "bullet_journal",
+      "action": "add_entry",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "bullet_journal",
+      "tool": "bullet_journal",
+      "action": "list_entries",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "bullet_journal",
+      "tool": "bullet_journal",
+      "action": "get_collections",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "files",
+      "tool": "files",
+      "action": "write_file_text",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "files",
+      "tool": "files",
+      "action": "read_file_text",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "files",
+      "tool": "files",
+      "action": "list_files",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "files",
+      "tool": "files",
+      "action": "grep_content",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "files",
+      "tool": "files",
+      "action": "run_terminal_command",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "claude_assistant",
+      "tool": "claude_assistant",
+      "action": "assign_task",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "claude_assistant",
+      "tool": "claude_assistant",
+      "action": "check_task_status",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "system_settings",
+      "tool": "system_settings",
+      "action": "list_tools",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "system_settings",
+      "tool": "system_settings",
+      "action": "list_supported_actions",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "automation_engine",
+      "tool": "automation_engine",
+      "action": "get_rules",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "automation_engine",
+      "tool": "automation_engine",
+      "action": "get_event_types",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "log_manager",
+      "tool": "log_manager",
+      "action": "get_recent",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    },
+    {
+      "group": "log_manager",
+      "tool": "log_manager",
+      "action": "get_summary",
+      "passed": true,
+      "reason": "OK",
+      "status_code": 200
+    }
+  ]
+}

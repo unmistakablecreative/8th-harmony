@@ -1,7 +1,0 @@
-{
-  "engines": [
-    "automation_engine.py",
-    "buffer_engine.py",
-    "podcast_publisher.py"
-  ]
-}

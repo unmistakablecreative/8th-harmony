@@ -1,46 +1,252 @@
-{"tool": "outline_editor", "action": "__tool__", "script_path": "tools/outline_editor.py"}
-{"tool": "outline_editor", "action": "create_doc_from_queue", "script_path": "tools/outline_editor.py", "params": ["entry_key"], "description": "Process a document from outline queue by entry_key. Reads markdown file and creates doc in Outline."}
-{"tool": "outline_editor", "action": "process_queue", "script_path": "tools/outline_editor.py", "params": [], "description": "Process all pending documents in the outline queue."}
-{"tool": "outline_editor", "action": "get_doc", "script_path": "tools/outline_editor.py", "params": ["doc_id"], "description": "Retrieve a specific Outline document by ID."}
-{"tool": "outline_editor", "action": "search_docs", "script_path": "tools/outline_editor.py", "params": ["query"], "description": "Search Outline documents by query string."}
-{"tool": "outline_editor", "action": "update_doc", "script_path": "tools/outline_editor.py", "params": ["doc_id", "text"], "description": "Update an existing Outline document."}
-{"tool": "outline_editor", "action": "list_docs", "script_path": "tools/outline_editor.py", "params": [], "description": "List all Outline documents."}
-{"tool": "nylas_inboxv2", "action": "__tool__", "script_path": "tools/nylas_inboxv2.py"}
-{"tool": "nylas_inboxv2", "action": "check_email", "script_path": "tools/nylas_inboxv2.py", "params": ["limit"], "description": "Check recent emails from inbox."}
-{"tool": "nylas_inboxv2", "action": "send_email", "script_path": "tools/nylas_inboxv2.py", "params": ["to", "subject", "body"], "description": "Send an email to specified recipient."}
-{"tool": "nylas_inboxv2", "action": "reply_to_email", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id", "body"], "description": "Reply to a specific email message."}
-{"tool": "nylas_inboxv2", "action": "search_messages", "script_path": "tools/nylas_inboxv2.py", "params": ["query"], "description": "Search through email messages."}
-{"tool": "nylas_inboxv2", "action": "open_message", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"], "description": "Open and read a specific email message."}
-{"tool": "nylas_inboxv2", "action": "delete_email", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"], "description": "Delete an email message."}
-{"tool": "nylas_calendar", "action": "__tool__", "script_path": "tools/nylas_calendar.py"}
-{"tool": "nylas_calendar", "action": "list_upcoming_events", "script_path": "tools/nylas_calendar.py", "params": [], "description": "List upcoming calendar events."}
-{"tool": "nylas_calendar", "action": "book_event", "script_path": "tools/nylas_calendar.py", "params": ["title", "start_time", "end_time"], "description": "Book a new calendar event."}
-{"tool": "nylas_calendar", "action": "delete_event", "script_path": "tools/nylas_calendar.py", "params": ["event_id"], "description": "Delete a calendar event."}
-{"tool": "nylas_calendar", "action": "list_calendars", "script_path": "tools/nylas_calendar.py", "params": [], "description": "List all available calendars."}
 {"tool": "json_manager", "action": "__tool__", "script_path": "tools/json_manager.py"}
-{"tool": "json_manager", "action": "read_json_file", "script_path": "tools/json_manager.py", "params": ["filename"], "description": "Read entire JSON file contents."}
-{"tool": "json_manager", "action": "read_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key"], "description": "Read specific entry from JSON file."}
-{"tool": "json_manager", "action": "add_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key", "data"], "description": "Add new entry to JSON file."}
-{"tool": "json_manager", "action": "update_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key", "data"], "description": "Update existing entry in JSON file."}
-{"tool": "json_manager", "action": "delete_json_entry", "script_path": "tools/json_manager.py", "params": ["filename", "entry_key"], "description": "Delete entry from JSON file."}
-{"tool": "json_manager", "action": "search_json_entries", "script_path": "tools/json_manager.py", "params": ["filename", "query"], "description": "Search entries in JSON file."}
-{"tool": "json_manager", "action": "list_json_entries", "script_path": "tools/json_manager.py", "params": ["filename"], "description": "List all entries in JSON file."}
-{"tool": "terminal_tool", "action": "__tool__", "script_path": "tools/terminal_tool.py"}
-{"tool": "terminal_tool", "action": "run_terminal_command", "script_path": "tools/terminal_tool.py", "params": ["command"], "description": "Execute a terminal command."}
-{"tool": "terminal_tool", "action": "read_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename"], "description": "Read text file contents."}
-{"tool": "terminal_tool", "action": "write_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "content"], "description": "Write text to a file."}
-{"tool": "terminal_tool", "action": "append_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "content"], "description": "Append text to a file."}
-{"tool": "terminal_tool", "action": "list_files", "script_path": "tools/terminal_tool.py", "params": ["directory"], "description": "List files in a directory."}
-{"tool": "terminal_tool", "action": "find_file", "script_path": "tools/terminal_tool.py", "params": ["keyword"], "description": "Find files by keyword."}
-{"tool": "system_settings", "action": "__tool__", "script_path": "tools/system_settings.py"}
-{"tool": "system_settings", "action": "list_tools", "script_path": "tools/system_settings.py", "params": [], "description": "List all registered tools."}
-{"tool": "system_settings", "action": "list_actions", "script_path": "tools/system_settings.py", "params": ["tool_name"], "description": "List all actions for a specific tool."}
-{"tool": "system_settings", "action": "set_credential", "script_path": "tools/system_settings.py", "params": ["key", "value"], "description": "Set a credential value."}
-{"tool": "system_settings", "action": "add_tool", "script_path": "tools/system_settings.py", "params": ["tool_name", "script_path"], "description": "Register a new tool."}
-{"tool": "system_settings", "action": "add_action", "script_path": "tools/system_settings.py", "params": ["tool_name", "action_name", "params"], "description": "Add an action to a tool."}
+{"tool": "json_manager", "action": "safe_write_json", "script_path": "tools/json_manager.py", "params": ["filepath", "data"]}
+{"tool": "json_manager", "action": "flatten_params", "script_path": "tools/json_manager.py", "params": ["params"]}
+{"tool": "json_manager", "action": "validate_flat_params", "script_path": "tools/json_manager.py", "params": ["params"]}
+{"tool": "json_manager", "action": "get_entries", "script_path": "tools/json_manager.py", "params": ["data"]}
+{"tool": "json_manager", "action": "set_entries", "script_path": "tools/json_manager.py", "params": ["data", "entries", "was_wrapped"]}
+{"tool": "json_manager", "action": "parse_filter_key", "script_path": "tools/json_manager.py", "params": ["key"]}
+{"tool": "json_manager", "action": "compare_value", "script_path": "tools/json_manager.py", "params": ["field_val", "filter_val", "operator"]}
+{"tool": "json_manager", "action": "render_as_table", "script_path": "tools/json_manager.py", "params": ["results", "columns"]}
+{"tool": "json_manager", "action": "render_as_markdown", "script_path": "tools/json_manager.py", "params": ["results"]}
+{"tool": "json_manager", "action": "render_as_summary", "script_path": "tools/json_manager.py", "params": ["results"]}
+{"tool": "json_manager", "action": "insert_json_entry_from_template", "script_path": "tools/json_manager.py", "params": ["entry_key", "filename", "template_name"]}
+{"tool": "json_manager", "action": "create_json_file_from_template", "script_path": "tools/json_manager.py", "params": ["new_filename", "template_name"]}
+{"tool": "json_manager", "action": "batch_add_field_to_json_entries", "script_path": "tools/json_manager.py", "params": ["entry_keys", "field_name", "field_value", "filename"]}
+{"tool": "json_manager", "action": "add_field_to_json_entry", "script_path": "tools/json_manager.py", "params": ["entry_key", "field_name", "field_value", "filename"]}
+{"tool": "json_manager", "action": "search_json_entries", "script_path": "tools/json_manager.py", "params": ["case_insensitive", "fields_to_return", "filename", "format", "max_results", "offset", "search_value"]}
+{"tool": "json_manager", "action": "list_json_entries", "script_path": "tools/json_manager.py", "params": ["filename", "max_results", "offset"]}
+{"tool": "json_manager", "action": "batch_delete_json_entries", "script_path": "tools/json_manager.py", "params": ["entry_keys", "filename"]}
+{"tool": "json_manager", "action": "delete_json_entry", "script_path": "tools/json_manager.py", "params": ["entry_key", "filename"]}
+{"tool": "json_manager", "action": "batch_update_json_entries", "script_path": "tools/json_manager.py", "params": ["filename", "updates"]}
+{"tool": "json_manager", "action": "update_json_entry", "script_path": "tools/json_manager.py", "params": ["entry_key", "filename"]}
+{"tool": "json_manager", "action": "read_json_entry", "script_path": "tools/json_manager.py", "params": ["entry_key", "filename"]}
+{"tool": "json_manager", "action": "add_json_entry", "script_path": "tools/json_manager.py", "params": ["entry_key", "filename"]}
+{"tool": "json_manager", "action": "upsert_json_entry", "script_path": "tools/json_manager.py", "params": ["entry_key", "filename"]}
+{"tool": "json_manager", "action": "read_json_file", "script_path": "tools/json_manager.py", "params": ["filename"]}
+{"tool": "json_manager", "action": "create_json_file", "script_path": "tools/json_manager.py", "params": ["filename"]}
+{"tool": "json_manager", "action": "log_thread_event", "script_path": "tools/json_manager.py", "params": ["context_goal", "entry_key", "next_steps", "recovery_signals", "status"]}
+{"tool": "json_manager", "action": "batch_add_json_entries", "script_path": "tools/json_manager.py", "params": ["entries", "filename"]}
+{"tool": "json_manager", "action": "log_task_entry", "script_path": "tools/json_manager.py", "params": ["description", "due", "entry_key", "estimated_time_min", "priority", "related_area", "status", "title"]}
+{"tool": "json_manager", "action": "log_resource_entry", "script_path": "tools/json_manager.py", "params": ["description", "entry_key", "title"]}
+{"tool": "json_manager", "action": "log_project_entry", "script_path": "tools/json_manager.py", "params": ["description", "entry_key", "status", "title"]}
+{"tool": "json_manager", "action": "add_intent_route_entry", "script_path": "tools/json_manager.py", "params": ["action", "description", "icon", "intent", "params", "tool"]}
+{"tool": "json_manager", "action": "sort_json_entries", "script_path": "tools/json_manager.py", "params": ["filename", "reverse", "sort_key"]}
+{"tool": "json_manager", "action": "log_content_entry", "script_path": "tools/json_manager.py", "params": ["description", "doc_id", "related_area", "status", "tags", "title"]}
+{"tool": "docs", "action": "__tool__", "script_path": "tools/doc_editor.py"}
+{"tool": "docs", "action": "get_db", "script_path": "tools/doc_editor.py", "params": ["params"]}
+{"tool": "docs", "action": "markdown_to_html", "script_path": "tools/doc_editor.py", "params": ["text"]}
+{"tool": "docs", "action": "resolve_collection", "script_path": "tools/doc_editor.py", "params": ["input_collection"]}
+{"tool": "docs", "action": "ensure_link_fields", "script_path": "tools/doc_editor.py", "params": ["doc"]}
+{"tool": "docs", "action": "link_docs", "script_path": "tools/doc_editor.py", "params": ["source_doc_id", "target_doc_id"]}
+{"tool": "docs", "action": "unlink_docs", "script_path": "tools/doc_editor.py", "params": ["source_doc_id", "target_doc_id"]}
+{"tool": "docs", "action": "read_backlinks", "script_path": "tools/doc_editor.py", "params": ["doc_id"]}
+{"tool": "docs", "action": "read_links", "script_path": "tools/doc_editor.py", "params": ["doc_id"]}
+{"tool": "docs", "action": "create_doc", "script_path": "tools/doc_editor.py", "params": ["title", "content", "collection", "convert_markdown"]}
+{"tool": "docs", "action": "update_doc", "script_path": "tools/doc_editor.py", "params": ["doc_id", "find", "replace", "title", "collection"]}
+{"tool": "docs", "action": "replace_section", "script_path": "tools/doc_editor.py", "params": ["doc_id", "section_header", "new_content", "convert_markdown"]}
+{"tool": "docs", "action": "append_doc", "script_path": "tools/doc_editor.py", "params": ["doc_id", "content", "convert_markdown"]}
+{"tool": "docs", "action": "delete_doc", "script_path": "tools/doc_editor.py", "params": ["doc_id"]}
+{"tool": "docs", "action": "delete_collection", "script_path": "tools/doc_editor.py", "params": ["collection"]}
+{"tool": "docs", "action": "read_doc", "script_path": "tools/doc_editor.py", "params": ["doc_id"]}
+{"tool": "docs", "action": "read_section", "script_path": "tools/doc_editor.py", "params": ["doc_id", "section_header", "section"]}
+{"tool": "docs", "action": "batch_read", "script_path": "tools/doc_editor.py", "params": ["doc_ids"]}
+{"tool": "docs", "action": "batch_create_docs", "script_path": "tools/doc_editor.py", "params": ["docs", "collection", "convert_markdown"]}
+{"tool": "docs", "action": "stitch_docs", "script_path": "tools/doc_editor.py", "params": ["doc_ids", "new_title"]}
+{"tool": "docs", "action": "search_within_doc", "script_path": "tools/doc_editor.py", "params": ["doc_id", "query"]}
+{"tool": "docs", "action": "list_docs", "script_path": "tools/doc_editor.py", "params": ["collection", "min_words", "max_words"]}
+{"tool": "docs", "action": "build_whoosh_index", "script_path": "tools/doc_editor.py", "params": ["force"]}
+{"tool": "docs", "action": "preprocess_query", "script_path": "tools/doc_editor.py", "params": ["q"]}
+{"tool": "docs", "action": "search_docs", "script_path": "tools/doc_editor.py", "params": ["query", "max_results", "status", "has_field", "collection", "min_words", "max_words"]}
+{"tool": "docs", "action": "batch_search", "script_path": "tools/doc_editor.py", "params": ["query", "collection", "limit"]}
+{"tool": "docs", "action": "import_docs", "script_path": "tools/doc_editor.py", "params": ["directory", "default_collection"]}
+{"tool": "docs", "action": "update_metadata", "script_path": "tools/doc_editor.py", "params": ["doc_id", "status", "description", "campaign_id", "published_url"]}
+{"tool": "docs", "action": "batch_update_metadata", "script_path": "tools/doc_editor.py", "params": ["updates"]}
+{"tool": "docs", "action": "migrate_from_outline", "script_path": "tools/doc_editor.py", "params": ["exclude_collections"]}
+{"tool": "docs", "action": "retrieve_doc", "script_path": "tools/doc_editor.py", "params": ["title", "collection"]}
+{"tool": "docs", "action": "sync_content_calendar", "script_path": "tools/doc_editor.py", "params": ["params"]}
+{"tool": "docs", "action": "list_revisions", "script_path": "tools/doc_editor.py", "params": ["doc_id"]}
+{"tool": "docs", "action": "get_revision", "script_path": "tools/doc_editor.py", "params": ["doc_id", "revision"]}
+{"tool": "docs", "action": "restore_revision", "script_path": "tools/doc_editor.py", "params": ["doc_id", "revision"]}
+{"tool": "bullet_journal", "action": "__tool__", "script_path": "tools/bullet_journal.py"}
+{"tool": "bullet_journal", "action": "load_journal", "script_path": "tools/bullet_journal.py", "params": ["params"]}
+{"tool": "bullet_journal", "action": "save_journal", "script_path": "tools/bullet_journal.py", "params": ["data"]}
+{"tool": "bullet_journal", "action": "generate_entry_key", "script_path": "tools/bullet_journal.py", "params": ["params"]}
+{"tool": "bullet_journal", "action": "add_entry", "script_path": "tools/bullet_journal.py", "params": ["collection", "content", "type"]}
+{"tool": "bullet_journal", "action": "list_entries", "script_path": "tools/bullet_journal.py", "params": ["collection", "limit", "status", "type"]}
+{"tool": "bullet_journal", "action": "update_status", "script_path": "tools/bullet_journal.py", "params": ["entry_key", "status"]}
+{"tool": "bullet_journal", "action": "delete_entry", "script_path": "tools/bullet_journal.py", "params": ["entry_key"]}
+{"tool": "bullet_journal", "action": "get_collections", "script_path": "tools/bullet_journal.py", "params": ["params"]}
+{"tool": "bullet_journal", "action": "backfill_summaries", "script_path": "tools/bullet_journal.py", "params": ["params"]}
+{"tool": "bullet_journal", "action": "batch_update_status", "script_path": "tools/bullet_journal.py", "params": ["entry_keys", "status"]}
+{"tool": "bullet_journal", "action": "batch_add_entries", "script_path": "tools/bullet_journal.py", "params": ["entries"]}
+{"tool": "bullet_journal", "action": "batch_delete_entries", "script_path": "tools/bullet_journal.py", "params": ["entry_keys"]}
+{"tool": "files", "action": "__tool__", "script_path": "tools/terminal_tool.py"}
+{"tool": "files", "action": "add_temporal_reminder", "script_path": "tools/terminal_tool.py", "params": ["params"]}
+{"tool": "files", "action": "resolve_path", "script_path": "tools/terminal_tool.py", "params": ["filename"]}
+{"tool": "files", "action": "read_file_text", "script_path": "tools/terminal_tool.py", "params": ["filename", "repo"]}
+{"tool": "files", "action": "write_file_text", "script_path": "tools/terminal_tool.py", "params": ["base64", "content", "filename", "filepath", "force", "path", "skip_lint", "text"]}
+{"tool": "files", "action": "write_python_script", "script_path": "tools/terminal_tool.py", "params": ["code_base64", "filename"]}
+{"tool": "files", "action": "append_file_text", "script_path": "tools/terminal_tool.py", "params": ["base64", "content", "filename", "text"]}
+{"tool": "files", "action": "list_files", "script_path": "tools/terminal_tool.py", "params": ["path", "recursive"]}
+{"tool": "files", "action": "patch_function_in_file", "script_path": "tools/terminal_tool.py", "params": ["filename", "function", "new_code", "new_code_base64"]}
+{"tool": "files", "action": "run_terminal_command", "script_path": "tools/terminal_tool.py", "params": ["bypass_intercept", "command", "command_base64"]}
+{"tool": "files", "action": "search_files", "script_path": "tools/terminal_tool.py", "params": ["case_sensitive", "extension", "keyword", "max_results", "path", "search_type"]}
+{"tool": "files", "action": "find_file", "script_path": "tools/terminal_tool.py", "params": ["params"]}
+{"tool": "files", "action": "insert_new_function_in_script", "script_path": "tools/terminal_tool.py", "params": ["base64", "code", "file_path", "filepath", "func_code", "function", "function_code", "path", "script_path"]}
+{"tool": "files", "action": "run_function_inline", "script_path": "tools/terminal_tool.py", "params": ["filename", "function_name", "params"]}
+{"tool": "files", "action": "delete_function_from_script", "script_path": "tools/terminal_tool.py", "params": ["file_path", "function_name"]}
+{"tool": "files", "action": "replace_lines", "script_path": "tools/terminal_tool.py", "params": ["base64", "end_line", "filename", "new_content", "start_line"]}
+{"tool": "files", "action": "grep_content", "script_path": "tools/terminal_tool.py", "params": ["case_insensitive", "context", "max_results", "path", "pattern", "type"]}
+{"tool": "files", "action": "read_function", "script_path": "tools/terminal_tool.py", "params": ["directory", "filename", "function_name"]}
+{"tool": "files", "action": "list_python_defs", "script_path": "tools/terminal_tool.py", "params": ["path"]}
+{"tool": "files", "action": "ssh_command", "script_path": "tools/terminal_tool.py", "params": ["command", "host", "key_file", "password", "port", "timeout", "username"]}
 {"tool": "claude_assistant", "action": "__tool__", "script_path": "tools/claude_assistant.py"}
-{"tool": "claude_assistant", "action": "assign_task", "script_path": "tools/claude_assistant.py", "params": ["task_id", "description", "priority"], "description": "Assign a task to Claude Code assistant queue."}
-{"tool": "claude_assistant", "action": "check_task_status", "script_path": "tools/claude_assistant.py", "params": ["task_id"], "description": "Check status of a Claude task."}
-{"tool": "claude_assistant", "action": "get_task_result", "script_path": "tools/claude_assistant.py", "params": ["task_id"], "description": "Get result of a completed Claude task."}
-{"tool": "claude_assistant", "action": "cancel_task", "script_path": "tools/claude_assistant.py", "params": ["task_id"], "description": "Cancel a pending Claude task."}
-{"tool": "claude_assistant", "action": "process_queue", "script_path": "tools/claude_assistant.py", "params": [], "description": "Process all pending tasks in Claude queue."}
+{"tool": "claude_assistant", "action": "get_queue_file_for_task", "script_path": "tools/claude_assistant.py", "params": ["task_id"]}
+{"tool": "claude_assistant", "action": "get_all_queue_files", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "claude_assistant", "action": "safe_read_queue_with_lock", "script_path": "tools/claude_assistant.py", "params": ["queue_file"]}
+{"tool": "claude_assistant", "action": "safe_write_queue_with_lock", "script_path": "tools/claude_assistant.py", "params": ["queue_file", "queue_data"]}
+{"tool": "claude_assistant", "action": "safe_write_queue", "script_path": "tools/claude_assistant.py", "params": ["queue_file", "queue_data"]}
+{"tool": "claude_assistant", "action": "validate_task_format", "script_path": "tools/claude_assistant.py", "params": ["description"]}
+{"tool": "claude_assistant", "action": "assign_task", "script_path": "tools/claude_assistant.py", "params": ["agent_id", "auto_execute", "batch_id", "campaign_id", "cascade_type", "context", "create_output_doc", "description", "doc_id", "priority", "task_id"]}
+{"tool": "claude_assistant", "action": "assign_demo_task", "script_path": "tools/claude_assistant.py", "params": ["task_id"]}
+{"tool": "claude_assistant", "action": "check_task_status", "script_path": "tools/claude_assistant.py", "params": ["task_id"]}
+{"tool": "claude_assistant", "action": "get_task_result", "script_path": "tools/claude_assistant.py", "params": ["task_id"]}
+{"tool": "claude_assistant", "action": "get_all_results", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "claude_assistant", "action": "ask_claude", "script_path": "tools/claude_assistant.py", "params": ["cwd", "question", "wait"]}
+{"tool": "claude_assistant", "action": "cancel_task", "script_path": "tools/claude_assistant.py", "params": ["remove", "task_id"]}
+{"tool": "claude_assistant", "action": "clear_queue", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "claude_assistant", "action": "update_task", "script_path": "tools/claude_assistant.py", "params": ["agent_id", "context", "description", "priority", "task_id"]}
+{"tool": "claude_assistant", "action": "process_queue", "script_path": "tools/claude_assistant.py", "params": ["agent_id", "peek"]}
+{"tool": "claude_assistant", "action": "mark_task_in_progress", "script_path": "tools/claude_assistant.py", "params": ["card_title", "task_id"]}
+{"tool": "claude_assistant", "action": "execute_queue", "script_path": "tools/claude_assistant.py", "params": ["agent_id", "parallel"]}
+{"tool": "claude_assistant", "action": "kill_agents", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "claude_assistant", "action": "log_task_completion", "script_path": "tools/claude_assistant.py", "params": ["actions_taken", "card_stat", "card_title", "errors", "execution_time_seconds", "output", "output_summary", "status", "task_id"]}
+{"tool": "claude_assistant", "action": "batch_assign_tasks", "script_path": "tools/claude_assistant.py", "params": ["parallel", "tasks"]}
+{"tool": "claude_assistant", "action": "assign_mockup_batch", "script_path": "tools/claude_assistant.py", "params": ["base_name", "description", "parallel", "styles", "variations"]}
+{"tool": "claude_assistant", "action": "get_recent_tasks", "script_path": "tools/claude_assistant.py", "params": ["limit"]}
+{"tool": "claude_assistant", "action": "parse_tasks_from_doc", "script_path": "tools/claude_assistant.py", "params": ["doc_text"]}
+{"tool": "claude_assistant", "action": "self_assign_from_doc", "script_path": "tools/claude_assistant.py", "params": ["doc_id", "parallel", "test_mode"]}
+{"tool": "claude_assistant", "action": "get_task_results", "script_path": "tools/claude_assistant.py", "params": ["format", "limit"]}
+{"tool": "claude_assistant", "action": "add_to_memory", "script_path": "tools/claude_assistant.py", "params": ["key", "type", "value"]}
+{"tool": "claude_assistant", "action": "get_working_memory", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "claude_assistant", "action": "clear_working_memory", "script_path": "tools/claude_assistant.py", "params": ["preserve_keys"]}
+{"tool": "claude_assistant", "action": "capture_token_telemetry", "script_path": "tools/claude_assistant.py", "params": ["action", "task_id", "tokens_input", "tokens_output", "tool"]}
+{"tool": "claude_assistant", "action": "infer_task_type", "script_path": "tools/claude_assistant.py", "params": ["task_description"]}
+{"tool": "claude_assistant", "action": "get_task_context", "script_path": "tools/claude_assistant.py", "params": ["task_description"]}
+{"tool": "claude_assistant", "action": "archive_thread_logs", "script_path": "tools/claude_assistant.py", "params": ["archive_file", "retention_days", "source_file"]}
+{"tool": "claude_assistant", "action": "stage_task", "script_path": "tools/claude_assistant.py", "params": ["description", "preset"]}
+{"tool": "claude_assistant", "action": "get_staged_tasks", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "claude_assistant", "action": "clear_staged_tasks", "script_path": "tools/claude_assistant.py", "params": ["params"]}
+{"tool": "system_settings", "action": "__tool__", "script_path": "tools/system_settings.py"}
+{"tool": "system_settings", "action": "load_credential", "script_path": "tools/system_settings.py", "params": ["key"]}
+{"tool": "system_settings", "action": "save_credential", "script_path": "tools/system_settings.py", "params": ["key", "value"]}
+{"tool": "system_settings", "action": "set_credential", "script_path": "tools/system_settings.py", "params": ["tool_name", "value"]}
+{"tool": "system_settings", "action": "load_registry", "script_path": "tools/system_settings.py", "params": ["params"]}
+{"tool": "system_settings", "action": "save_registry", "script_path": "tools/system_settings.py", "params": ["entries"]}
+{"tool": "system_settings", "action": "extract_actions_from_script", "script_path": "tools/system_settings.py", "params": ["tool_script_path"]}
+{"tool": "system_settings", "action": "add_tool", "script_path": "tools/system_settings.py", "params": ["locked", "referral_unlock_cost", "script_path", "tool_name"]}
+{"tool": "system_settings", "action": "remove_tool", "script_path": "tools/system_settings.py", "params": ["tool_name"]}
+{"tool": "system_settings", "action": "add_action", "script_path": "tools/system_settings.py", "params": ["action_name", "description", "parameters", "tool_name"]}
+{"tool": "system_settings", "action": "remove_action", "script_path": "tools/system_settings.py", "params": ["action_name", "tool_name"]}
+{"tool": "system_settings", "action": "list_tools", "script_path": "tools/system_settings.py", "params": ["params"]}
+{"tool": "system_settings", "action": "list_supported_actions", "script_path": "tools/system_settings.py", "params": ["params"]}
+{"tool": "system_settings", "action": "add_memory_file", "script_path": "tools/system_settings.py", "params": ["path"]}
+{"tool": "system_settings", "action": "remove_memory_file", "script_path": "tools/system_settings.py", "params": ["path"]}
+{"tool": "system_settings", "action": "list_memory_files", "script_path": "tools/system_settings.py", "params": ["params"]}
+{"tool": "system_settings", "action": "build_working_memory", "script_path": "tools/system_settings.py", "params": ["params"]}
+{"tool": "system_settings", "action": "refresh_runtime", "script_path": "tools/system_settings.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "__tool__", "script_path": "tools/automation_engine.py"}
+{"tool": "automation_engine", "action": "read_json", "script_path": "tools/automation_engine.py", "params": ["path"]}
+{"tool": "automation_engine", "action": "write_json", "script_path": "tools/automation_engine.py", "params": ["path", "data"]}
+{"tool": "automation_engine", "action": "atomic_update_entry_status", "script_path": "tools/automation_engine.py", "params": ["file_path", "entry_key", "new_status", "extra_fields"]}
+{"tool": "automation_engine", "action": "log_execution_history", "script_path": "tools/automation_engine.py", "params": ["rule_id", "trigger_type", "entry_id", "action_name", "result", "duration_ms"]}
+{"tool": "automation_engine", "action": "get_execution_history", "script_path": "tools/automation_engine.py", "params": ["limit", "rule_id", "since", "status"]}
+{"tool": "automation_engine", "action": "load_tool_registry", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "resolve_context_values", "script_path": "tools/automation_engine.py", "params": ["params", "context"]}
+{"tool": "automation_engine", "action": "run_action", "script_path": "tools/automation_engine.py", "params": ["action", "context", "timeout", "rule_id", "trigger_type", "entry_id"]}
+{"tool": "automation_engine", "action": "run_workflow_steps", "script_path": "tools/automation_engine.py", "params": ["steps", "initial_context", "timeout", "rule_id", "trigger_type", "entry_id"]}
+{"tool": "automation_engine", "action": "process_queue_entry_with_lock", "script_path": "tools/automation_engine.py", "params": ["file_path", "key", "entry", "rule"]}
+{"tool": "automation_engine", "action": "engine_loop", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "add_rule", "script_path": "tools/automation_engine.py", "params": ["rule", "rule_key", "skip_validation"]}
+{"tool": "automation_engine", "action": "update_rule", "script_path": "tools/automation_engine.py", "params": ["rule", "rule_key", "skip_validation"]}
+{"tool": "automation_engine", "action": "delete_rule", "script_path": "tools/automation_engine.py", "params": ["rule_key"]}
+{"tool": "automation_engine", "action": "get_rule", "script_path": "tools/automation_engine.py", "params": ["rule_key"]}
+{"tool": "automation_engine", "action": "get_rules", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "list_rules", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "add_event_type", "script_path": "tools/automation_engine.py", "params": ["key", "test"]}
+{"tool": "automation_engine", "action": "update_event_type", "script_path": "tools/automation_engine.py", "params": ["key", "test"]}
+{"tool": "automation_engine", "action": "get_event_types", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "dispatch_event", "script_path": "tools/automation_engine.py", "params": ["event_key", "payload"]}
+{"tool": "automation_engine", "action": "retry_failed", "script_path": "tools/automation_engine.py", "params": ["file"]}
+{"tool": "automation_engine", "action": "now", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "days", "script_path": "tools/automation_engine.py", "params": ["n"]}
+{"tool": "automation_engine", "action": "hours", "script_path": "tools/automation_engine.py", "params": ["n"]}
+{"tool": "automation_engine", "action": "minutes", "script_path": "tools/automation_engine.py", "params": ["n"]}
+{"tool": "automation_engine", "action": "parse_duration", "script_path": "tools/automation_engine.py", "params": ["value"]}
+{"tool": "automation_engine", "action": "is_older_than", "script_path": "tools/automation_engine.py", "params": ["timestamp_str", "duration"]}
+{"tool": "automation_engine", "action": "evaluate_condition", "script_path": "tools/automation_engine.py", "params": ["condition", "context"]}
+{"tool": "automation_engine", "action": "load_tool_actions", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "find_similar_name", "script_path": "tools/automation_engine.py", "params": ["name", "available_names", "threshold"]}
+{"tool": "automation_engine", "action": "validate_rule", "script_path": "tools/automation_engine.py", "params": ["rule"]}
+{"tool": "automation_engine", "action": "dry_run_rule", "script_path": "tools/automation_engine.py", "params": ["file", "rule_id"]}
+{"tool": "automation_engine", "action": "dry_run_all_rules", "script_path": "tools/automation_engine.py", "params": ["params"]}
+{"tool": "automation_engine", "action": "toggle_rule_enabled", "script_path": "tools/automation_engine.py", "params": ["enabled", "rule_key"]}
+{"tool": "automation_engine", "action": "retry_failed_entries", "script_path": "tools/automation_engine.py", "params": ["file", "max_retries", "retry_delay_base", "rule_id"]}
+{"tool": "log_manager", "action": "__tool__", "script_path": "tools/log_manager.py"}
+{"tool": "log_manager", "action": "get_recent", "script_path": "tools/log_manager.py", "params": ["n", "source"]}
+{"tool": "log_manager", "action": "search_by_tool", "script_path": "tools/log_manager.py", "params": ["tool_name", "limit"]}
+{"tool": "log_manager", "action": "search_by_action", "script_path": "tools/log_manager.py", "params": ["action_name", "limit"]}
+{"tool": "log_manager", "action": "search_by_status", "script_path": "tools/log_manager.py", "params": ["status", "limit"]}
+{"tool": "log_manager", "action": "filter_by_source", "script_path": "tools/log_manager.py", "params": ["source", "limit"]}
+{"tool": "log_manager", "action": "filter_by_time", "script_path": "tools/log_manager.py", "params": ["hours", "source"]}
+{"tool": "log_manager", "action": "get_task_by_id", "script_path": "tools/log_manager.py", "params": ["task_id"]}
+{"tool": "log_manager", "action": "search_task_archive", "script_path": "tools/log_manager.py", "params": ["keyword", "tool_filter", "category", "date_from", "date_to", "limit"]}
+{"tool": "log_manager", "action": "get_summary", "script_path": "tools/log_manager.py", "params": ["hours"]}
+{"tool": "nylas_inboxv2", "action": "__tool__", "script_path": "tools/nylas_inboxv2.py"}
+{"tool": "nylas_inboxv2", "action": "get_context_map", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "get_test_crm_map", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "clean_email_content", "script_path": "tools/nylas_inboxv2.py", "params": ["raw_content"]}
+{"tool": "nylas_inboxv2", "action": "fetch_inbox", "script_path": "tools/nylas_inboxv2.py", "params": ["limit", "page_token"]}
+{"tool": "nylas_inboxv2", "action": "build_summary", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "read_inbox_summary", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "generate_inbox_latest_template", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "build_updates_summary", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "list_by_tag", "script_path": "tools/nylas_inboxv2.py", "params": ["tag_filter"]}
+{"tool": "nylas_inboxv2", "action": "search", "script_path": "tools/nylas_inboxv2.py", "params": ["limit", "query", "sender", "subject", "tag"]}
+{"tool": "nylas_inboxv2", "action": "search_messages_local", "script_path": "tools/nylas_inboxv2.py", "params": ["sender", "subject", "tag"]}
+{"tool": "nylas_inboxv2", "action": "read_message", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"]}
+{"tool": "nylas_inboxv2", "action": "read_thread", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"]}
+{"tool": "nylas_inboxv2", "action": "send", "script_path": "tools/nylas_inboxv2.py", "params": ["attachments", "body", "send_at", "subject", "to", "to_override"]}
+{"tool": "nylas_inboxv2", "action": "list_scheduled", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_inboxv2", "action": "cancel_scheduled", "script_path": "tools/nylas_inboxv2.py", "params": ["schedule_id"]}
+{"tool": "nylas_inboxv2", "action": "reply", "script_path": "tools/nylas_inboxv2.py", "params": ["attachments", "body", "message_id"]}
+{"tool": "nylas_inboxv2", "action": "delete", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"]}
+{"tool": "nylas_inboxv2", "action": "archive", "script_path": "tools/nylas_inboxv2.py", "params": ["folder_id", "message_id"]}
+{"tool": "nylas_inboxv2", "action": "unarchive", "script_path": "tools/nylas_inboxv2.py", "params": ["folder_id", "message_id"]}
+{"tool": "nylas_inboxv2", "action": "batch_unarchive", "script_path": "tools/nylas_inboxv2.py", "params": ["folder_id", "limit"]}
+{"tool": "nylas_inboxv2", "action": "remove_from_inbox_json", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id"]}
+{"tool": "nylas_inboxv2", "action": "batch_delete_emails", "script_path": "tools/nylas_inboxv2.py", "params": ["message_ids"]}
+{"tool": "nylas_inboxv2", "action": "sync_archived_emails", "script_path": "tools/nylas_inboxv2.py", "params": ["message_ids"]}
+{"tool": "nylas_inboxv2", "action": "tag_message", "script_path": "tools/nylas_inboxv2.py", "params": ["message_id", "tags"]}
+{"tool": "nylas_inboxv2", "action": "batch_tag_messages", "script_path": "tools/nylas_inboxv2.py", "params": ["message_ids", "tags"]}
+{"tool": "nylas_inboxv2", "action": "search_sent_messages", "script_path": "tools/nylas_inboxv2.py", "params": ["days_back", "subject_contains", "to_email"]}
+{"tool": "nylas_inboxv2", "action": "send_from_template", "script_path": "tools/nylas_inboxv2.py", "params": ["context", "email_type", "name", "send_at", "test_mode", "to_override"]}
+{"tool": "nylas_inboxv2", "action": "sync_tracking", "script_path": "tools/nylas_inboxv2.py", "params": ["context"]}
+{"tool": "nylas_inboxv2", "action": "check_and_send_followups", "script_path": "tools/nylas_inboxv2.py", "params": ["context", "followup_delay_minutes"]}
+{"tool": "nylas_inboxv2", "action": "parse_financial_transaction", "script_path": "tools/nylas_inboxv2.py", "params": ["email"]}
+{"tool": "nylas_inboxv2", "action": "prepare_inbox_dashboard", "script_path": "tools/nylas_inboxv2.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "__tool__", "script_path": "tools/nylas_calendar.py"}
+{"tool": "nylas_calendar", "action": "extract_event_minimal", "script_path": "tools/nylas_calendar.py", "params": ["event"]}
+{"tool": "nylas_calendar", "action": "list_events", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "book_event", "script_path": "tools/nylas_calendar.py", "params": ["calendar_id", "email", "end_time", "start_time", "title"]}
+{"tool": "nylas_calendar", "action": "delete_event", "script_path": "tools/nylas_calendar.py", "params": ["calendar_id", "event_id"]}
+{"tool": "nylas_calendar", "action": "read_availability", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "create_calendar", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "set_time_slots", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "list_calendars", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "list_scheduler_configs", "script_path": "tools/nylas_calendar.py", "params": ["params"]}
+{"tool": "nylas_calendar", "action": "read_scheduler_config", "script_path": "tools/nylas_calendar.py", "params": ["config_id"]}
+{"tool": "nylas_calendar", "action": "update_scheduler_config", "script_path": "tools/nylas_calendar.py", "params": ["config_id", "updates"]}
+{"tool": "nylas_calendar", "action": "create_scheduler_config", "script_path": "tools/nylas_calendar.py", "params": ["available_days_in_future", "buffer_after", "buffer_before", "days", "description", "duration_minutes", "end", "interval_minutes", "slug", "start", "timezone", "title"]}
+{"tool": "nylas_calendar", "action": "add_meet_link_to_scheduler", "script_path": "tools/nylas_calendar.py", "params": ["config_id"]}
+{"tool": "nylas_calendar", "action": "sync_to_dashboard", "script_path": "tools/nylas_calendar.py", "params": ["params"]}

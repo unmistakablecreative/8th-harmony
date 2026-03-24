@@ -1,1 +1,118 @@
-[]
+{
+  "results": {
+    "task_20260324_103840_a379ef91": {
+      "status": "done",
+      "description": "Create a doc titled Integration Test in Inbox collection with content All systems operational",
+      "completed_at": "2026-03-24T10:39:58.810457",
+      "execution_time_seconds": 70.72,
+      "actions_taken": [
+        "marked task in progress",
+        "discovered outline_editor deprecated to docs tool",
+        "created Integration Test doc in Inbox collection with content All systems operational",
+        "doc_id: doc_cea53b4a"
+      ],
+      "output": {},
+      "output_summary": "Task completed",
+      "errors": null,
+      "project_tags": [],
+      "processing_started_at": "2026-03-24T10:38:48.090291",
+      "started_at": "2026-03-24T10:38:40.026327",
+      "batch_id": "batch_20260324_103840_task_202",
+      "batch_position": 2
+    },
+    "task_20260324_103955_61bb2ea3": {
+      "status": "done",
+      "description": "Create a doc titled Integration Test in Inbox collection with content All systems operational",
+      "completed_at": "2026-03-24T10:40:57.212528",
+      "execution_time_seconds": 56.4,
+      "actions_taken": [
+        "created doc Integration Test in Inbox collection via docs.create_doc",
+        "appended summary to doc_8124c2bd via docs.append_doc"
+      ],
+      "output": {},
+      "output_summary": "Task completed",
+      "errors": null,
+      "project_tags": [],
+      "processing_started_at": "2026-03-24T10:40:00.813445",
+      "started_at": "2026-03-24T10:39:55.766221",
+      "batch_id": "batch_20260324_103955_task_202",
+      "batch_position": 2
+    },
+    "task_20260324_104220_51775efa": {
+      "status": "done",
+      "description": "Create a doc titled Integration Test in Inbox collection with content All systems operational",
+      "completed_at": "2026-03-24T10:43:58.722049",
+      "execution_time_seconds": 89.1,
+      "actions_taken": [
+        "checked API for supported actions",
+        "discovered docs tool with create_doc action",
+        "created doc titled Integration Test in Inbox collection with content All systems operational",
+        "doc_id: doc_fbff0d3d"
+      ],
+      "output": {},
+      "output_summary": "Task completed",
+      "errors": null,
+      "project_tags": [],
+      "processing_started_at": "2026-03-24T10:42:29.617139",
+      "started_at": "2026-03-24T10:42:20.516110",
+      "batch_id": "batch_20260324_104220_task_202",
+      "batch_position": 2
+    },
+    "task_20260324_104352_8021bbdf": {
+      "status": "done",
+      "description": "Run system_settings list_tools and confirm the result contains json_manager",
+      "completed_at": "2026-03-24T10:44:06.182504",
+      "execution_time_seconds": 6.54,
+      "actions_taken": [
+        "marked task as in_progress",
+        "ran system_settings list_tools",
+        "confirmed json_manager is present in tools list"
+      ],
+      "output": {},
+      "output_summary": "Task completed",
+      "errors": null,
+      "project_tags": [],
+      "processing_started_at": "2026-03-24T10:43:59.637477",
+      "started_at": "2026-03-24T10:43:52.521488",
+      "batch_id": "batch_20260324_104352_task_202",
+      "batch_position": 2
+    },
+    "task_20260324_104739_4b4e5b3d": {
+      "status": "done",
+      "description": "Run system_settings list_tools and confirm the result contains json_manager",
+      "completed_at": "2026-03-24T10:47:51.917348",
+      "execution_time_seconds": 7.15,
+      "actions_taken": [
+        "marked task in progress",
+        "ran system_settings list_tools via execution_hub",
+        "confirmed json_manager is present in the returned tools list"
+      ],
+      "output": {},
+      "output_summary": "Task completed",
+      "errors": null,
+      "project_tags": [],
+      "processing_started_at": "2026-03-24T10:47:44.765703",
+      "started_at": "2026-03-24T10:47:39.405608",
+      "batch_id": "batch_20260324_104739_task_202",
+      "batch_position": 2
+    },
+    "task_20260324_105035_86d8418c": {
+      "status": "done",
+      "description": "Use the docs tool create_doc action to create a doc titled Integration Test in Inbox collection with content All systems operational",
+      "completed_at": "2026-03-24T10:51:05.538514",
+      "execution_time_seconds": 23.51,
+      "actions_taken": [
+        "Created doc titled Integration Test in Inbox collection with content All systems operational",
+        "Appended summary section to doc_c84a13b6"
+      ],
+      "output": {},
+      "output_summary": "Task completed",
+      "errors": null,
+      "project_tags": [],
+      "processing_started_at": "2026-03-24T10:50:42.031636",
+      "started_at": "2026-03-24T10:50:35.045801",
+      "batch_id": "batch_20260324_105035_task_202",
+      "batch_position": 2
+    }
+  }
+}

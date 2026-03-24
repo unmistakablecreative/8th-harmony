@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrchestrateOS Tools</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d9ff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header p { color: #666; margin-top: 0.5rem; }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        .stat-card {
+            background: rgba(20,20,30,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
+            text-align: center;
+            min-width: 140px;
+        }
+        .stat-card .label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-card .value { font-size: 2rem; font-weight: 700; margin-top: 0.25rem; }
+        .stat-card.credits .value { color: #10b981; }
+        .stat-card.unlocked .value { color: #a855f7; }
+        .stat-card.total .value { color: #00d9ff; }
+
+        /* Tool Cards Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        .tool-card {
+            background: rgba(20,20,30,0.9);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .tool-card:hover {
+            border-color: rgba(0,217,255,0.3);
+            transform: translateY(-2px);
+        }
+        .tool-card.locked {
+            opacity: 0.7;
+        }
+        .tool-card.locked:hover {
+            opacity: 1;
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        .tool-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .tool-name.color-0 { color: #00d9ff; }
+        .tool-name.color-1 { color: #a855f7; }
+        .tool-name.color-2 { color: #ef4444; }
+        .tool-name.color-3 { color: #10b981; }
+        .tool-name.color-4 { color: #f59e0b; }
+        .tool-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .tool-badge.unlocked {
+            background: rgba(16,185,129,0.2);
+            color: #10b981;
+        }
+        .tool-badge.locked {
+            background: rgba(239,68,68,0.2);
+            color: #ef4444;
+        }
+        .tool-desc {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .tool-cost {
+            font-size: 0.85rem;
+            color: #f59e0b;
+            font-weight: 600;
+        }
+        .tool-cost.free { color: #10b981; }
+
+        .tool-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+        .btn-unlock {
+            background: #3b82f6;
+            color: #fff;
+        }
+        .btn-unlock:hover { background: #2563eb; }
+        .btn-unlock:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .btn-refer {
+            background: rgba(139,92,246,0.2);
+            color: #a78bfa;
+            border: 1px solid rgba(139,92,246,0.3);
+        }
+        .btn-refer:hover { background: rgba(139,92,246,0.3); }
+        .btn-creds {
+            background: rgba(16,185,129,0.2);
+            color: #10b981;
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+        .btn-creds:hover { background: rgba(16,185,129,0.3); }
+        .btn-creds.set {
+            background: transparent;
+            border: 1px solid rgba(16,185,129,0.5);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 420px;
+            width: 90%;
+        }
+        .modal h3 { margin-bottom: 0.5rem; color: #fff; }
+        .modal p { color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .modal input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .modal input:focus {
+            outline: none;
+            border-color: rgba(0,217,255,0.5);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .modal-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .modal-btn.primary { background: #3b82f6; color: #fff; }
+        .modal-btn.primary:hover { background: #2563eb; }
+        .modal-btn.cancel { background: rgba(255,255,255,0.1); color: #888; }
+        .modal-btn.cancel:hover { background: rgba(255,255,255,0.15); }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+            font-size: 0.9rem;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-color: #10b981; }
+        .toast.error { border-color: #ef4444; }
+
+        /* Refresh */
+        .refresh-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(0,217,255,0.1);
+            border: 1px solid rgba(0,217,255,0.3);
+            color: #00d9ff;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .refresh-btn:hover { background: rgba(0,217,255,0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OrchestrateOS Tools</h1>
+            <p>Unlock tools with referral credits</p>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-card total">
+                <div class="label">Total Tools</div>
+                <div class="value" id="totalTools">-</div>
+            </div>
+            <div class="stat-card credits">
+                <div class="label">Credits</div>
+                <div class="value" id="creditsAvailable">-</div>
+            </div>
+            <div class="stat-card unlocked">
+                <div class="label">Unlocked</div>
+                <div class="value" id="toolsUnlocked">-</div>
+            </div>
+        </div>
+
+        <div class="tools-grid" id="toolsGrid">
+            <div class="tool-card"><div class="tool-name">Loading...</div></div>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="loadData()">&#8635; Refresh</button>
+
+    <!-- Unlock Modal -->
+    <div class="modal-overlay" id="unlockModal">
+        <div class="modal">
+            <h3>Unlock <span id="unlockToolName"></span></h3>
+            <p>This will cost <span id="unlockCost" style="color:#f59e0b;font-weight:600;"></span> credits.</p>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('unlockModal')">Cancel</button>
+                <button class="modal-btn primary" onclick="confirmUnlock()">Unlock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credentials Modal -->
+    <div class="modal-overlay" id="credentialsModal">
+        <div class="modal">
+            <h3>Configure <span id="credToolName"></span></h3>
+            <p>Enter your API credentials</p>
+            <div id="credentialFields"></div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('credentialsModal')">Cancel</button>
+                <button class="modal-btn primary" onclick="saveCredentials()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Referral Modal -->
+    <div class="modal-overlay" id="referralModal">
+        <div class="modal">
+            <h3>Refer a Friend</h3>
+            <p>Earn 3 credits for each successful referral</p>
+            <input type="text" id="referralName" placeholder="Friend's name">
+            <input type="email" id="referralEmail" placeholder="Friend's email">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('referralModal')">Cancel</button>
+                <button class="modal-btn primary" onclick="submitReferral()">Send Invite</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let tools = [];
+        let userCredits = 0;
+        let pendingUnlock = null;
+        let pendingCredTool = null;
+
+        const API = window.location.origin;
+
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        async function loadData() {
+            await Promise.all([loadToolCatalog(), loadCredits()]);
+            renderTools();
+        }
+
+        async function loadToolCatalog() {
+            try {
+                const res = await fetch(`${API}/get_tool_catalog`);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    tools = data.tools;
+                    document.getElementById('totalTools').textContent = data.total;
+                    document.getElementById('toolsUnlocked').textContent = data.unlocked_count;
+                }
+            } catch (e) {
+                console.error('Failed to load catalog:', e);
+                showToast('Failed to load tools', 'error');
+            }
+        }
+
+        async function loadCredits() {
+            try {
+                const res = await fetch(`${API}/execute_task`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({tool_name: 'check_credits', action: 'check_credits', params: {}})
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    userCredits = data.credits || 0;
+                    document.getElementById('creditsAvailable').textContent = userCredits;
+                }
+            } catch (e) {
+                console.error('Failed to load credits:', e);
+            }
+        }
+
+        function renderTools() {
+            const grid = document.getElementById('toolsGrid');
+            if (!tools.length) {
+                grid.innerHTML = '<div class="tool-card"><div class="tool-name">No tools available</div></div>';
+                return;
+            }
+
+            // Filter out internal/meta tools that don't need display
+            const hiddenTools = ['unlock_tool', 'system_control', 'check_credits', 'refer_user'];
+            const visible = tools.filter(t => !hiddenTools.includes(t.name));
+
+            // Sort: unlocked first, then locked sorted by cost (ascending)
+            const sorted = [...visible].sort((a, b) => {
+                if (a.unlocked && !b.unlocked) return -1;
+                if (!a.unlocked && b.unlocked) return 1;
+                if (!a.unlocked && !b.unlocked) return a.cost - b.cost;
+                return 0;
+            });
+
+            grid.innerHTML = sorted.map((tool, idx) => {
+                const canAfford = userCredits >= tool.cost;
+                const hasCreds = localStorage.getItem('creds_' + tool.name) === 'true';
+                const colorClass = 'color-' + (idx % 5);
+
+                return `
+                <div class="tool-card ${tool.unlocked ? '' : 'locked'}">
+                    <div class="tool-header">
+                        <div class="tool-name ${colorClass}">${tool.label}</div>
+                        <span class="tool-badge ${tool.unlocked ? 'unlocked' : 'locked'}">
+                            ${tool.unlocked ? '&#10003; Unlocked' : '&#128274; Locked'}
+                        </span>
+                    </div>
+                    <div class="tool-desc">${tool.description}</div>
+                    <div class="tool-footer">
+                        <div class="tool-cost ${tool.cost === 0 ? 'free' : ''}">
+                            ${tool.cost > 0 ? tool.cost + ' credits' : 'Free'}
+                        </div>
+                        <div class="tool-actions">
+                            ${!tool.unlocked && tool.cost > 0 ? `
+                                <button class="btn btn-unlock" onclick="showUnlockModal('${tool.name}', '${tool.label}', ${tool.cost})" ${!canAfford ? 'disabled title="Need more credits"' : ''}>
+                                    Unlock
+                                </button>
+                                <button class="btn btn-refer" onclick="showReferralModal()">+ Refer</button>
+                            ` : ''}
+                            ${tool.unlocked && tool.requires_credentials ? `
+                                <button class="btn btn-creds ${hasCreds ? 'set' : ''}" onclick="showCredentialsModal('${tool.name}', '${tool.label}', ${JSON.stringify(tool.credential_fields).replace(/"/g, '&quot;')})">
+                                    ${hasCreds ? '&#10003; Configured' : 'Set Credentials'}
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function showUnlockModal(name, label, cost) {
+            pendingUnlock = {name, label, cost};
+            document.getElementById('unlockToolName').textContent = label;
+            document.getElementById('unlockCost').textContent = cost;
+            document.getElementById('unlockModal').classList.add('active');
+        }
+
+        function showCredentialsModal(name, label, fields) {
+            pendingCredTool = {name, label, fields};
+            document.getElementById('credToolName').textContent = label;
+            document.getElementById('credentialFields').innerHTML = fields.map(f =>
+                `<input type="text" id="cred_${f}" placeholder="${f}">`
+            ).join('');
+            document.getElementById('credentialsModal').classList.add('active');
+        }
+
+        function showReferralModal() {
+            document.getElementById('referralModal').classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        async function confirmUnlock() {
+            if (!pendingUnlock) return;
+            closeModal('unlockModal');
+
+            try {
+                const res = await fetch(`${API}/execute_task`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        tool_name: 'unlock_tool',
+                        action: 'unlock_tool',
+                        params: {tool_name: pendingUnlock.name}
+                    })
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    showToast(`${pendingUnlock.label} unlocked!`, 'success');
+                    await loadData();
+
+                    // Check if this tool requires credentials and show dialog
+                    const unlockedTool = tools.find(t => t.name === pendingUnlock.name);
+                    if (unlockedTool && unlockedTool.requires_credentials && unlockedTool.credential_fields && unlockedTool.credential_fields.length > 0) {
+                        setTimeout(() => {
+                            showCredentialsModal(unlockedTool.name, unlockedTool.label, unlockedTool.credential_fields);
+                        }, 500);
+                    }
+                } else {
+                    showToast(data.message || data.error || 'Unlock failed', 'error');
+                }
+            } catch (e) {
+                showToast('Unlock failed: ' + e.message, 'error');
+            }
+            pendingUnlock = null;
+        }
+
+        async function saveCredentials() {
+            if (!pendingCredTool) return;
+
+            const values = {};
+            for (const f of pendingCredTool.fields) {
+                const input = document.getElementById('cred_' + f);
+                if (input && input.value.trim()) {
+                    values[f] = input.value.trim();
+                }
+            }
+
+            if (Object.keys(values).length === 0) {
+                showToast('Please enter at least one credential', 'error');
+                return;
+            }
+
+            closeModal('credentialsModal');
+
+            try {
+                const res = await fetch(`${API}/execute_task`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        tool_name: 'system_settings',
+                        action: 'set_credential',
+                        params: {tool_name: pendingCredTool.name, value: JSON.stringify(values)}
+                    })
+                });
+                const data = await res.json();
+
+                if (data.status === 'success' || !data.error) {
+                    localStorage.setItem('creds_' + pendingCredTool.name, 'true');
+                    showToast('Credentials saved!', 'success');
+                    renderTools();
+                } else {
+                    showToast(data.message || 'Failed to save', 'error');
+                }
+            } catch (e) {
+                showToast('Save failed: ' + e.message, 'error');
+            }
+            pendingCredTool = null;
+        }
+
+        async function submitReferral() {
+            const name = document.getElementById('referralName').value.trim();
+            const email = document.getElementById('referralEmail').value.trim();
+
+            if (!name || !email) {
+                showToast('Please enter name and email', 'error');
+                return;
+            }
+
+            closeModal('referralModal');
+
+            try {
+                const res = await fetch(`${API}/execute_task`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        tool_name: 'refer_user',
+                        action: 'refer_user',
+                        params: {name, email}
+                    })
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    showToast('Referral sent! +3 credits', 'success');
+                    document.getElementById('referralName').value = '';
+                    document.getElementById('referralEmail').value = '';
+                    await loadData();
+                } else {
+                    showToast(data.message || 'Referral failed', 'error');
+                }
+            } catch (e) {
+                showToast('Referral failed: ' + e.message, 'error');
+            }
+        }
+
+        function showToast(msg, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>

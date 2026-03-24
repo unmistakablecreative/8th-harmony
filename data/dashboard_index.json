@@ -1,29 +1,44 @@
 {
   "dashboard_items": [
     {
-      "key": "intent_routes",
+      "key": "toolkit",
       "source": "file",
-      "file": "data/intent_routes.json",
+      "file": "system_settings.ndjson",
+      "formatter": "toolkit_list",
       "display_type": "table",
-      "formatter": "intent_routes_table",
-      "priority": 1,
-      "description": "Available commands and tools"
+      "limit": 50
     },
     {
-      "key": "calendar_events",
-      "source": "tool_action",
-      "tool": "nylas_calendar",
-      "action": "list_events",
-      "params": {},
+      "key": "app_store",
+      "source": "file",
+      "file": "data/orchestrate_app_store.json",
+      "formatter": "app_store_list",
       "display_type": "list",
-      "formatter": "calendar_list",
-      "priority": 2,
-      "description": "Upcoming calendar events"
+      "limit": 10
+    },
+    {
+      "key": "working_memory",
+      "source": "file",
+      "file": "data/working_memory.json",
+      "formatter": "raw_json",
+      "display_type": "json",
+      "description": "You can add anything here and it persists across threads. Use json_manager to edit."
+    },
+    {
+      "key": "intent_routes",
+      "source": "file",
+      "file": "data/orchestrate_intent_routes.json",
+      "formatter": "raw_json",
+      "display_type": "json",
+      "description": "Natural language routing patterns for tool actions."
+    },
+    {
+      "key": "update_messages",
+      "source": "file",
+      "file": "data/update_messages.json",
+      "formatter": "raw_json",
+      "display_type": "json",
+      "description": "System update messages visible to users."
     }
-  ],
-  "config": {
-    "refresh_interval_seconds": 300,
-    "enable_caching": true,
-    "default_limit": 10
-  }
+  ]
 }

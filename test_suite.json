@@ -1,0 +1,93 @@
+{
+  "description": "Test suite for 8th-harmony — generated from system_settings.ndjson",
+  "base_url": "http://localhost:5003",
+  "group_count": 8,
+  "test_count": 26,
+  "groups": [
+    {
+      "group_name": "json_manager",
+      "description": "JSON file CRUD — create, add, read, update, list, search, delete",
+      "ordered": true,
+      "tests": [
+        {"tool_name": "json_manager", "action": "create_json_file", "params": {"filename": "test_fixture.json"}, "capture_as": "jm_create"},
+        {"tool_name": "json_manager", "action": "add_json_entry", "params": {"filename": "test_fixture.json", "entry_key": "test_001", "data": {"name": "Test", "status": "active"}}},
+        {"tool_name": "json_manager", "action": "read_json_entry", "params": {"filename": "test_fixture.json", "entry_key": "test_001"}},
+        {"tool_name": "json_manager", "action": "update_json_entry", "params": {"filename": "test_fixture.json", "entry_key": "test_001", "data": {"name": "Test", "status": "done"}}},
+        {"tool_name": "json_manager", "action": "list_json_entries", "params": {"filename": "test_fixture.json"}},
+        {"tool_name": "json_manager", "action": "search_json_entries", "params": {"filename": "test_fixture.json", "query": "test"}},
+        {"tool_name": "json_manager", "action": "read_json_file", "params": {"filename": "test_fixture.json"}}
+      ]
+    },
+    {
+      "group_name": "docs",
+      "description": "Doc editor CRUD — create, read, list, search, append, update, delete",
+      "ordered": true,
+      "tests": [
+        {"tool_name": "docs", "action": "create_doc", "params": {"title": "Test Doc", "content": "Hello world", "collection": "Inbox", "convert_markdown": false}, "capture_as": "doc_create", "capture_key": "doc_id"},
+        {"tool_name": "docs", "action": "read_doc", "params": {}, "inject": [{"capture_from": "doc_create", "capture_key": "doc_id", "inject_as": "doc_id"}]},
+        {"tool_name": "docs", "action": "list_docs", "params": {"collection": "Inbox"}},
+        {"tool_name": "docs", "action": "search_docs", "params": {"query": "Test Doc"}},
+        {"tool_name": "docs", "action": "append_doc", "params": {"content": " Appended content", "convert_markdown": false}, "inject": [{"capture_from": "doc_create", "capture_key": "doc_id", "inject_as": "doc_id"}]},
+        {"tool_name": "docs", "action": "update_doc", "params": {"title": "Updated Test Doc", "find": "", "replace": ""}, "inject": [{"capture_from": "doc_create", "capture_key": "doc_id", "inject_as": "doc_id"}]}
+      ]
+    },
+    {
+      "group_name": "bullet_journal",
+      "description": "Bullet journal — add entry, list, get collections, delete",
+      "ordered": true,
+      "tests": [
+        {"tool_name": "bullet_journal", "action": "add_entry", "params": {"type": "note", "content": "Test entry", "collection": "SHIP"}, "capture_as": "bj_add", "capture_key": "entry_key"},
+        {"tool_name": "bullet_journal", "action": "list_entries", "params": {}},
+        {"tool_name": "bullet_journal", "action": "get_collections", "params": {}}
+      ]
+    },
+    {
+      "group_name": "files",
+      "description": "File operations — write, read, list, grep, terminal command",
+      "ordered": true,
+      "tests": [
+        {"tool_name": "files", "action": "write_file_text", "params": {"filepath": "data/test_file.txt", "content": "hello world"}},
+        {"tool_name": "files", "action": "read_file_text", "params": {"filename": "data/test_file.txt"}},
+        {"tool_name": "files", "action": "list_files", "params": {"path": "data", "recursive": false}},
+        {"tool_name": "files", "action": "grep_content", "params": {"pattern": "hello", "path": "data"}},
+        {"tool_name": "files", "action": "run_terminal_command", "params": {"command": "echo test_passed"}}
+      ]
+    },
+    {
+      "group_name": "claude_assistant",
+      "description": "Claude assistant — assign task, check status",
+      "ordered": true,
+      "tests": [
+        {"tool_name": "claude_assistant", "action": "assign_task", "params": {"description": "Use the docs tool create_doc action to create a doc titled Integration Test in Inbox collection with content All systems operational"}, "capture_as": "task_assign", "capture_key": "task_id"},
+        {"tool_name": "claude_assistant", "action": "check_task_status", "params": {}, "inject": [{"capture_from": "task_assign", "capture_key": "task_id", "inject_as": "task_id"}]}
+      ]
+    },
+    {
+      "group_name": "system_settings",
+      "description": "System settings — list tools, list actions",
+      "ordered": false,
+      "tests": [
+        {"tool_name": "system_settings", "action": "list_tools", "params": {}},
+        {"tool_name": "system_settings", "action": "list_supported_actions", "params": {}}
+      ]
+    },
+    {
+      "group_name": "automation_engine",
+      "description": "Automation engine — get rules, get event types",
+      "ordered": false,
+      "tests": [
+        {"tool_name": "automation_engine", "action": "get_rules", "params": {}},
+        {"tool_name": "automation_engine", "action": "get_event_types", "params": {}}
+      ]
+    },
+    {
+      "group_name": "log_manager",
+      "description": "Log manager — get recent, get summary",
+      "ordered": false,
+      "tests": [
+        {"tool_name": "log_manager", "action": "get_recent", "params": {}},
+        {"tool_name": "log_manager", "action": "get_summary", "params": {}}
+      ]
+    }
+  ]
+}
